@@ -1,7 +1,9 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styles from '@/styles/Layout.module.css';
-import Header from '@/components/header/header';
-import Footer from '@/components/footer/footer';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
+import { Showcase } from '@/components/showcase';
 
 import { ILayout } from './contracts';
 
@@ -11,6 +13,8 @@ export default function Layout({
   keywords,
   children,
 }: ILayout) {
+  const { pathname } = useRouter();
+
   return (
     <div>
       <Head>
@@ -19,6 +23,7 @@ export default function Layout({
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
+      {pathname === '/' && <Showcase />}
       <div className={styles.container}>{children}</div>
       <Footer />
     </div>
