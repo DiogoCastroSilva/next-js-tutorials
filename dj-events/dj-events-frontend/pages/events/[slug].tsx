@@ -7,7 +7,7 @@ export default function EventPage() {
       <div>
         <h1>Event</h1>
         <Link href="/events">
-          <a>{'<'} Go Back</a>
+          {'<'} Go Back
         </Link>
       </div>
     </Layout>
