@@ -1,9 +1,9 @@
 import { Layout } from '@/components/layout';
 
 export default function HomePage() {
-   return (
-      <Layout>
-         Home
-      </Layout>
-   );
+  return (
+    <Layout>
+      <h1>Upcoming Events</h1>
+    </Layout>
+  );
 }
