@@ -4,6 +4,7 @@ import styles from '@/styles/Layout.module.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Showcase } from '@/components/showcase';
+import '@/styles/globals.css';
 
 import { ILayout } from './contracts';
 

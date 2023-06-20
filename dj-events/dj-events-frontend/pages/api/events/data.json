@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "name": "Event 1",
+    "slug": "event-1",
+    "venue": "Venue 1",
+    "address": "address 1",
+    "performers": "performers 1",
+    "date": "June 09, 2024",
+    "time": "10:00 PM EST",
+    "description": "description 1",
+    "image": "/images/sample/event1.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Event 2",
+    "slug": "event-2",
+    "venue": "Venue 2",
+    "address": "address 2",
+    "performers": "performers 2",
+    "date": "June 09, 2024",
+    "time": "10:00 PM EST",
+    "description": "description 2",
+    "image": "/images/sample/event2.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Event 3",
+    "slug": "event-3",
+    "venue": "Venue 3",
+    "address": "address 3",
+    "performers": "performers 3",
+    "date": "June 09, 2024",
+    "time": "10:00 PM EST",
+    "description": "description 3",
+    "image": "/images/sample/event3.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Event 4",
+    "slug": "event-4",
+    "venue": "Venue 4",
+    "address": "address 4",
+    "performers": "performers 4",
+    "date": "June 09, 2024",
+    "time": "10:00 PM EST",
+    "description": "description 4",
+    "image": "/images/sample/event4.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Event 5",
+    "slug": "event-5",
+    "venue": "Venue 5",
+    "address": "address 5",
+    "performers": "performers 5",
+    "date": "June 09, 2024",
+    "time": "10:00 PM EST",
+    "description": "description 5",
+    "image": "/images/sample/event5.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Event 6",
+    "slug": "event-6",
+    "venue": "Venue 6",
+    "address": "address 6",
+    "performers": "performers 6",
+    "date": "June 09, 2024",
+    "time": "10:00 PM EST",
+    "description": "description 6",
+    "image": "/images/sample/event6.jpg"
+  }
+]
