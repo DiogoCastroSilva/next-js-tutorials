@@ -1,24 +1,26 @@
-import { FaPencilAlt, FaTimes } from 'react-icons/fa';
-import Link from 'next/link';
-import Image from 'next/image';
 import { Layout } from '@/components/layout';
 import { API_ENDPOINT } from '@/config';
-import { InferGetStaticPropsType, GetStaticProps, GetStaticPaths } from 'next';
 import { SingleEvent } from '@/models/events';
 import styles from '@/styles/Event.module.css';
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FaPencilAlt, FaTimes } from 'react-icons/fa';
 
 type StaticProps = GetStaticProps<SingleEvent, { slug: string }>;
 
 export default function EventPage({
-  name,
+  attributes: {
+    name,
+    date,
+    time,
+    image,
+    performers,
+    description,
+    venue,
+    address,
+  },
   id,
-  date,
-  time,
-  image,
-  performers,
-  description,
-  venue,
-  address,
 }: InferGetStaticPropsType<StaticProps>) {
   const deleteEvent = () => {
     console.log('delete');
@@ -36,12 +38,17 @@ export default function EventPage({
           </a>
         </div>
         <span>
-          {date} at {time}
+          {new Date(date).toLocaleDateString('en-US')} at {time}
         </span>
         <h1>{name}</h1>
         {image && (
           <div className={styles.image}>
-            <Image src={image} alt={name} width={960} height={600} />
+            <Image
+              src={image.formats.medium.url}
+              alt={name}
+              width={960}
+              height={600}
+            />
           </div>
         )}
         <h3>Performers:</h3>
@@ -59,9 +66,22 @@ export default function EventPage({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`${API_ENDPOINT}/api/events`);
-  const musicEvents = (await res.json()) as SingleEvent[];
-  const paths = musicEvents.map(({ slug }) => ({ params: { slug } }));
+  const res = await fetch(`${API_ENDPOINT}/api/events?_sort=date:ASC`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    console.error(res.statusText);
+    throw new Error(`An error occured please try again`);
+  }
+
+  const { data } = (await res.json()) as { data: SingleEvent[] };
+
+  const paths = data.map(({ attributes: { slug } }) => ({
+    params: { slug },
+  }));
 
   return {
     paths,
@@ -70,12 +90,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: StaticProps = async ({ params }) => {
-  const res = await fetch(`${API_ENDPOINT}/api/events/${params?.slug}`);
-  const event = (await res.json()) as SingleEvent;
+  const res = await fetch(`${API_ENDPOINT}/api/events?slug=${params?.slug}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    console.error(res.statusText);
+    throw new Error(`An error occured please try again`);
+  }
+
+  const { data } = (await res.json()) as { data: SingleEvent[] };
 
   return {
     props: {
-      ...event,
+      ...data[0],
     },
     revalidate: 1,
   };
