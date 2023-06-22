@@ -29,5 +29,6 @@ export async function getStaticProps() {
     props: {
       events: events.slice(0, 3), // Limit by 3 events
     },
+    revalidate: 1,
   };
 }
