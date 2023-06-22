@@ -4,15 +4,19 @@ import { SingleEvent } from '@/models/events';
 import styles from '@/styles/EventItem.module.css';
 
 export default function EventItem({
-  attributes: { slug, name, image, description, date, time },
+  attributes: { slug, name, image, date, time },
 }: SingleEvent) {
   return (
     <div className={styles.event}>
       <div className={styles.img}>
         <Image
-          alt={description}
+          alt={
+            image.data.attributes.alternativeText || image.data.attributes.name
+          }
           src={
-            image ? image.formats.thumbnail.url : '/images/event-default.png'
+            image
+              ? image.data.attributes.formats.thumbnail.url
+              : '/images/event-default.png'
           }
           width={170}
           height={100}

@@ -16,11 +16,14 @@ export default function EventsPage({ events }: { events: SingleEvent[] }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${API_ENDPOINT}/api/events?_sort=date:ASC`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const res = await fetch(
+    `${API_ENDPOINT}/api/events?_sort=date:ASC&populate=*`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
 
   if (!res.ok) {
     console.error(res.statusText);

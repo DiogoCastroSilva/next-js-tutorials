@@ -44,10 +44,14 @@ export default function EventPage({
         {image && (
           <div className={styles.image}>
             <Image
-              src={image.formats.medium.url}
-              alt={name}
+              src={image.data.attributes.formats.medium.url}
+              alt={
+                image.data.attributes.alternativeText ||
+                image.data.attributes.name
+              }
               width={960}
               height={600}
+              priority
             />
           </div>
         )}
@@ -90,11 +94,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: StaticProps = async ({ params }) => {
-  const res = await fetch(`${API_ENDPOINT}/api/events?slug=${params?.slug}`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const res = await fetch(
+    `${API_ENDPOINT}/api/events?slug=${params?.slug}&populate=*`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
 
   if (!res.ok) {
     console.error(res.statusText);

@@ -1,3 +1,22 @@
+type IURL = { url: string };
+
+interface IFormats {
+  large: IURL;
+  medium: IURL;
+  small: IURL;
+  thumbnail: IURL;
+}
+
+interface IImage {
+  data: {
+    attributes: {
+      formats: IFormats;
+      alternativeText?: string;
+      name: string;
+    };
+  };
+}
+
 interface SingleEvent {
   id: string;
   attributes: {
@@ -9,7 +28,7 @@ interface SingleEvent {
     date: string;
     time: string;
     description: string;
-    image: string;
+    image: IImage;
   };
 }
 

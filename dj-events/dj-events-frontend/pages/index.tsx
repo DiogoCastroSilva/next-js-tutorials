@@ -26,7 +26,7 @@ export default function HomePage({ events }: { events: SingleEvent[] }) {
 
 export async function getStaticProps() {
   const res = await fetch(
-    `${API_ENDPOINT}/api/events?_sort=date:ASC&_limit=3`,
+    `${API_ENDPOINT}/api/events?_sort=date:ASC&_limit=3&populate=*`,
     {
       headers: {
         'Content-Type': 'application/json',
