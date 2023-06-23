@@ -11,11 +11,11 @@ export default function EventItem({
       <div className={styles.img}>
         <Image
           alt={
-            image.data.attributes.alternativeText || image.data.attributes.name
+            image.data?.attributes.alternativeText || image.data?.attributes.name
           }
           src={
             image
-              ? image.data.attributes.formats.thumbnail.url
+              ? image.data?.attributes.formats.thumbnail.url
               : '/images/event-default.png'
           }
           width={170}

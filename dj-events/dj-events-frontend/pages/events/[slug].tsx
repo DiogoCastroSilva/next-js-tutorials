@@ -44,10 +44,10 @@ export default function EventPage({
         {image && (
           <div className={styles.image}>
             <Image
-              src={image.data.attributes.formats.medium.url}
+              src={image.data?.attributes.formats.medium.url}
               alt={
-                image.data.attributes.alternativeText ||
-                image.data.attributes.name
+                image.data?.attributes.alternativeText ||
+                image.data?.attributes.name
               }
               width={960}
               height={600}
