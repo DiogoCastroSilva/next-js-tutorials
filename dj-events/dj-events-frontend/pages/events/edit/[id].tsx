@@ -1,6 +1,9 @@
 import { Layout } from '@/components/layout';
 import { API_ENDPOINT } from '@/config';
+import { SingleEvent } from '@/models/events';
 import styles from '@/styles/Form.module.css';
+import moment from 'moment';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
@@ -8,55 +11,63 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-const defaultValues = {
-  name: {
-    id: 'name',
-    name: 'name',
-    label: 'Name',
-    placeholder: 'Event name...',
-    value: '',
-  },
-  performers: {
-    id: 'performers',
-    name: 'performers',
-    label: 'Performers',
-    placeholder: 'Performers name...',
-    value: '',
-  },
-  venue: {
-    id: 'venue',
-    name: 'venue',
-    label: 'Venue',
-    placeholder: 'Venue name...',
-    value: '',
-  },
-  date: {
-    id: 'date',
-    name: 'date',
-    label: 'Date',
-    placeholder: 'Date...',
-    value: '',
-    type: 'date',
-  },
-  time: {
-    id: 'time',
-    name: 'time',
-    label: 'Time',
-    placeholder: 'Time...',
-    value: '',
-  },
-  description: {
-    id: 'description',
-    name: 'description',
-    label: 'Description',
-    placeholder: 'Description...',
-    value: '',
-    type: 'text-area',
-  },
+type ServerSideProps = GetServerSideProps<SingleEvent, { id: string }>;
+
+const defaultValues = ({ attributes }: SingleEvent) => {
+  const { name, performers, venue, date, time, description } = attributes || {};
+
+  return {
+    name: {
+      id: 'name',
+      name: 'name',
+      label: 'Name',
+      placeholder: 'Event name...',
+      value: name,
+    },
+    performers: {
+      id: 'performers',
+      name: 'performers',
+      label: 'Performers',
+      placeholder: 'Performers name...',
+      value: performers,
+    },
+    venue: {
+      id: 'venue',
+      name: 'venue',
+      label: 'Venue',
+      placeholder: 'Venue name...',
+      value: venue,
+    },
+    date: {
+      id: 'date',
+      name: 'date',
+      label: 'Date',
+      placeholder: 'Date...',
+      value: date,
+      type: 'date',
+    },
+    time: {
+      id: 'time',
+      name: 'time',
+      label: 'Time',
+      placeholder: 'Time...',
+      value: time,
+    },
+    description: {
+      id: 'description',
+      name: 'description',
+      label: 'Description',
+      placeholder: 'Description...',
+      value: description,
+      type: 'text-area',
+    },
+  };
 };
 
-export default function AddEventPage() {
-  const [textInputs, setTextInputs] = useState(defaultValues);
+export default function EditEventPage({
+  event,
+}: InferGetServerSidePropsType<GetServerSideProps>) {
+  const [textInputs, setTextInputs] = useState(defaultValues(event));
   const router = useRouter();
 
   const handleOnSubmit = async (e: FormEvent) => {
@@ -87,8 +98,8 @@ export default function AddEventPage() {
     };
 
     // Submit
-    const res = await fetch(`${API_ENDPOINT}/api/events`, {
-      method: 'POST',
+    const res = await fetch(`${API_ENDPOINT}/api/events/${event.id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -116,10 +127,12 @@ export default function AddEventPage() {
     });
   };
 
+  console.log(event);
+
   return (
     <Layout title="Add New Event">
       <Link href="/events">Go Back</Link>
-      <h1>Add Event</h1>
+      <h1>Edit Event</h1>
       <ToastContainer />
       <form onSubmit={handleOnSubmit} className={styles.form}>
         <div className={styles.grid}>
@@ -144,7 +157,11 @@ export default function AddEventPage() {
                     type={type || 'text'}
                     id={id}
                     name={name}
-                    value={value}
+                    value={
+                      type === 'date'
+                        ? moment(value).format('yyyy-MM-dd')
+                        : value
+                    }
                     placeholder={placeholder}
                     onChange={handleOnChange}
                   />
@@ -153,8 +170,30 @@ export default function AddEventPage() {
             );
           })}
         </div>
-        <input type="submit" value="Add Event" className="btn" />
+        <input type="submit" value="Update Event" className="btn" />
       </form>
     </Layout>
   );
 }
+
+export const getServerSideProps: ServerSideProps = async ({ params }) => {
+  const { id } = params || {};
+  const res = await fetch(`${API_ENDPOINT}/api/events/${id}?populate=*`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    console.error(res.statusText);
+    throw new Error(`An error occured please try again`);
+  }
+
+  const { data } = (await res.json()) || {};
+
+  return {
+    props: {
+      event: data,
+    },
+  };
+};
