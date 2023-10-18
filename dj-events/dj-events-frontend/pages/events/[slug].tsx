@@ -89,13 +89,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true, // false or "blocking"
+    fallback: false, // false or "blocking"
   };
 };
 
 export const getStaticProps: StaticProps = async ({ params }) => {
   const res = await fetch(
-    `${API_ENDPOINT}/api/events?slug=${params?.slug}&populate=*`,
+    `${API_ENDPOINT}/api/events?filters[slug][$eq]=${params?.slug}&populate=*`,
     {
       headers: {
         'Content-Type': 'application/json',
