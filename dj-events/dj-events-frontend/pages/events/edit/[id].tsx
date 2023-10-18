@@ -1,13 +1,15 @@
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import { FaImage } from 'react-icons/fa';
+import moment from 'moment';
+import { useRouter } from 'next/router';
 import { Layout } from '@/components/layout';
 import { API_ENDPOINT } from '@/config';
 import { SingleEvent } from '@/models/events';
 import styles from '@/styles/Form.module.css';
-import moment from 'moment';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -68,6 +70,11 @@ export default function EditEventPage({
   event,
 }: InferGetServerSidePropsType<GetServerSideProps>) {
   const [textInputs, setTextInputs] = useState(defaultValues(event));
+  const [imagePreview, setImagePreview] = useState(
+    event.attributes.image.data
+      ? event.attributes.image.data.attributes.formats.thumbnail.url
+      : null
+  );
   const router = useRouter();
 
   const handleOnSubmit = async (e: FormEvent) => {
@@ -172,6 +179,19 @@ export default function EditEventPage({
         </div>
         <input type="submit" value="Update Event" className="btn" />
       </form>
+      <h2>Event Image</h2>
+      {imagePreview ? (
+        <Image alt="Event Image" src={imagePreview} width={170} height={100} />
+      ) : (
+        <div>
+          <p>No image uploaded</p>
+        </div>
+      )}
+      <div>
+        <button className="btn-secondary">
+          <FaImage /> Set Image
+        </button>
+      </div>
     </Layout>
   );
 }
