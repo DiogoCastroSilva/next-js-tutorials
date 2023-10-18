@@ -1,11 +1,15 @@
+import { useRouter } from 'next/router';
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import { FaPencilAlt, FaTimes } from 'react-icons/fa';
 import { Layout } from '@/components/layout';
 import { API_ENDPOINT } from '@/config';
 import { SingleEvent } from '@/models/events';
 import styles from '@/styles/Event.module.css';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FaPencilAlt, FaTimes } from 'react-icons/fa';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 type StaticProps = GetStaticProps<SingleEvent, { slug: string }>;
 
@@ -22,8 +26,22 @@ export default function EventPage({
   },
   id,
 }: InferGetStaticPropsType<StaticProps>) {
-  const deleteEvent = () => {
-    console.log('delete');
+  const router = useRouter();
+
+  const deleteEvent = async () => {
+    if (confirm('Are you sure')) {
+      const res = await fetch(`${API_ENDPOINT}/api/events/${id}`, {
+        method: 'DELETE',
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message);
+      } else {
+        router.push('/events');
+      }
+    }
   };
 
   return (
@@ -41,6 +59,7 @@ export default function EventPage({
           {new Date(date).toLocaleDateString('en-US')} at {time}
         </span>
         <h1>{name}</h1>
+        <ToastContainer />
         {image && (
           <div className={styles.image}>
             <Image
