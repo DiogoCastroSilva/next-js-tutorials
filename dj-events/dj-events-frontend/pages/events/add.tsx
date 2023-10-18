@@ -1,8 +1,12 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { Layout } from '@/components/layout';
+import { API_ENDPOINT } from '@/config';
+import styles from '@/styles/Form.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Layout } from '@/components/layout';
-import styles from '@/styles/Form.module.css';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultValues = {
   name: {
@@ -54,9 +58,49 @@ export default function AddEventPage() {
   const [textInputs, setTextInputs] = useState(defaultValues);
   const router = useRouter();
 
-  const handleOnSubmit = (e: FormEvent) => {
+  const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(textInputs);
+
+    // Validation
+    const hasEmptyFields = Object.values(textInputs).some(
+      (input) => input.value === ''
+    );
+
+    if (hasEmptyFields) {
+      toast.error('Please fill in all fields');
+      return;
+    }
+
+    const data = {
+      data: {
+        ...Object.keys(textInputs).reduce((acc, key) => {
+          if (key === 'date') {
+            acc[key] = new Date(textInputs[key].value).toISOString();
+          } else {
+            acc[key] = textInputs[key].value;
+          }
+
+          return acc;
+        }, {}),
+      },
+    };
+
+    // Submit
+    const res = await fetch(`${API_ENDPOINT}/api/events`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      toast.error('Something went wrong');
+    } else {
+      const { data } = await res.json();
+
+      router.push(`/events/${data.attributes.slug}`);
+    }
   };
 
   const handleOnChange = ({
@@ -75,6 +119,7 @@ export default function AddEventPage() {
     <Layout title="Add New Event">
       <Link href="/events">Go Back</Link>
       <h1>Add Event</h1>
+      <ToastContainer />
       <form onSubmit={handleOnSubmit} className={styles.form}>
         <div className={styles.grid}>
           {Object.keys(textInputs).map((key) => {
