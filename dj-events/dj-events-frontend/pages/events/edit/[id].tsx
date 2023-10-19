@@ -7,6 +7,8 @@ import { FaImage } from 'react-icons/fa';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import { Layout } from '@/components/layout';
+import { Modal } from '@/components/modal';
+import { ImageUpload } from '@/components/image-upload';
 import { API_ENDPOINT } from '@/config';
 import { SingleEvent } from '@/models/events';
 import styles from '@/styles/Form.module.css';
@@ -75,6 +77,7 @@ export default function EditEventPage({
       ? event.attributes.image.data.attributes.formats.thumbnail.url
       : null
   );
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   const handleOnSubmit = async (e: FormEvent) => {
@@ -134,7 +137,14 @@ export default function EditEventPage({
     });
   };
 
-  console.log(event);
+  const imageUploaded = async () => {
+   const res = await fetch(`${API_ENDPOINT}/api/events/${event.id}?populate=*`);
+
+   const data = res.json();
+
+   setImagePreview(data.image.data.attributes.formats.thumbnail.url);
+   setShowModal(false);
+  };
 
   return (
     <Layout title="Add New Event">
@@ -188,10 +198,17 @@ export default function EditEventPage({
         </div>
       )}
       <div>
-        <button className="btn-secondary">
+        <button className="btn-secondary" onClick={() => setShowModal(true)}>
           <FaImage /> Set Image
         </button>
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        title="Image Upload"
+      >
+        <ImageUpload eventId={event.id} onImageUploaded={imageUploaded} />
+      </Modal>
     </Layout>
   );
 }
