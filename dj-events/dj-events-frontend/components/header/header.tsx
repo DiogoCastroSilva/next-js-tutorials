@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from '@/styles/Header.module.css';
 import Search from '@/components/search/search';
+import { FaSignInAlt } from 'react-icons/fa';
 
 export default function Header() {
   return (
@@ -16,6 +17,11 @@ export default function Header() {
           </li>
           <li>
             <Link href="/events/add">Add Event</Link>
+          </li>
+          <li>
+            <Link href="/account/login" className="btn-secondary btn-icon">
+              <FaSignInAlt /> Login
+            </Link>
           </li>
         </ul>
       </nav>
