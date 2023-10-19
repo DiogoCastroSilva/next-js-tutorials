@@ -4,8 +4,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link';
 import { Layout } from '@/components/layout';
 import styles from '@/styles/AuthForm.module.css';
+import useAuth from '@/hooks/use-auth';
 
 export default function RegisterPage() {
+  const { register } = useAuth();
   const [form, setForm] = useState({
     email: '',
     username: '',
@@ -16,10 +18,14 @@ export default function RegisterPage() {
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (form.password !== form.passwordConfirm) {
+    const { password, passwordConfirm, ...rest } = form;
+
+    if (password !== passwordConfirm) {
       toast.error('Passwords do not match!');
       return;
     }
+
+    register({ ...rest, password });
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {

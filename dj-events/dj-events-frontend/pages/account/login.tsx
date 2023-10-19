@@ -4,8 +4,10 @@ import { ToastContainer } from 'react-toastify';
 import Link from 'next/link';
 import { Layout } from '@/components/layout';
 import styles from '@/styles/AuthForm.module.css';
+import useAuth from '@/hooks/use-auth';
 
 export default function LoginPage() {
+  const { login } = useAuth();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -13,6 +15,7 @@ export default function LoginPage() {
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
+    login(form);
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
