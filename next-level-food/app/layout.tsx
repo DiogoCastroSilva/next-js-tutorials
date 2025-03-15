@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import MainHeader from '@/app/components/main-header/main-header';
+
 import './globals.css';
 
 export const metadata = {
@@ -31,6 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             ></path>
           </svg>
         </div>
+        <MainHeader />
         {children}
       </body>
     </html>
