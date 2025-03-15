@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import Link from 'next/link';
 
 import { COMMUNITY, MEALS } from '@/app/configs/routes';
+import ImageSlideshow from '@/app/components/image-slideshow/image-slideshow';
 
 import styles from './page.module.css';
 
@@ -9,7 +10,9 @@ export default function Home() {
   return (
     <Fragment>
       <header className={styles.header}>
-        <div className={styles.slideshow}></div>
+        <div className={styles.slideshow}>
+          <ImageSlideshow />
+        </div>
         <div>
           <div className={styles.hero}>
             <h1>Next Level Food for Next Level Foodies</h1>
