@@ -6,7 +6,10 @@ import MealsGrid from '@/app/components/meals-grid/meals-grid';
 
 import styles from './page.module.css';
 
-export default function Meals() {
+export default async function Meals() {
+  const res = await fetch('http://localhost:3000/api/meals');
+  const meals = await res.json();
+
   return (
     <Fragment>
       <header>
@@ -23,7 +26,7 @@ export default function Meals() {
         </p>
       </header>
       <main className={styles.main}>
-        <MealsGrid meals={[]} />
+        <MealsGrid meals={meals || []} />
       </main>
     </Fragment>
   );
