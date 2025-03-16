@@ -1,15 +1,13 @@
-import { Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
 import Link from 'next/link';
 
 import { SHARE_MEALS } from '@/app/configs/routes';
-import MealsGrid from '@/app/components/meals-grid/meals-grid';
+import Meals from '@/app/components/meals/meals';
 
 import styles from './page.module.css';
+import LoadingMeals from '@/app/components/loading-meals/loading-meals';
 
-export default async function Meals() {
-  const res = await fetch('http://localhost:3000/api/meals');
-  const meals = await res.json();
-
+export default function MealsPage() {
   return (
     <Fragment>
       <header>
@@ -26,7 +24,9 @@ export default async function Meals() {
         </p>
       </header>
       <main className={styles.main}>
-        <MealsGrid meals={meals || []} />
+        <Suspense fallback={<LoadingMeals />}>
+          <Meals />
+        </Suspense>
       </main>
     </Fragment>
   );
