@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Logo from '@/assets/logo.png';
 import { HOME, MEALS, COMMUNITY } from '@/app/configs/routes';
 import MainHeaderBackground from '@/app/components/main-header-background/main-header-background';
+import MainHeaderLink from '@/app/components/main-header-link/main-header-link';
 
 import styles from './main-header.module.css';
 
@@ -20,10 +21,12 @@ const MainHeader = () => {
         <nav className={styles.nav}>
           <ul>
             <li>
-              <Link href={MEALS}>Browse Meals</Link>
+              <MainHeaderLink href={MEALS}>Browse Meals</MainHeaderLink>
             </li>
             <li>
-              <Link href={COMMUNITY}>Foodies Cummunity</Link>
+              <MainHeaderLink href={COMMUNITY}>
+                Foodies Community
+              </MainHeaderLink>
             </li>
           </ul>
         </nav>
