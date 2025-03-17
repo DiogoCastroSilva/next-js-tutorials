@@ -6,7 +6,7 @@ import ImageSlideshow from '@/app/components/image-slideshow/image-slideshow';
 
 import styles from './page.module.css';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <Fragment>
       <header className={styles.header}>

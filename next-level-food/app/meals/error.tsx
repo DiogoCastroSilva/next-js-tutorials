@@ -1,6 +1,6 @@
 'use client';
 
-export default function Error() {
+export default function ErrorPage() {
   return (
     <main className="error">
       <h1>An error occoured</h1>
