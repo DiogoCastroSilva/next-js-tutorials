@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
 import ImagePicker from '@/app/components/images-picker/images-picker';
+import { shareMeal } from '@/app/actions/share-actions';
 
 import styles from './page.module.css';
 
@@ -14,7 +15,7 @@ export default function ShareMealPage() {
         <p>Or any other meal you feel needs sharing!</p>
       </header>
       <main className={styles.main}>
-        <form className={styles.form}>
+        <form className={styles.form} action={shareMeal}>
           <div className={styles.row}>
             <p>
               <label htmlFor="name">Your name</label>
@@ -42,7 +43,7 @@ export default function ShareMealPage() {
               required
             ></textarea>
           </p>
-          <ImagePicker name="meal-image" label="Meal Image" />
+          <ImagePicker name="image" label="Meal Image" />
           <p className={styles.actions}>
             <button type="submit">Share Meal</button>
           </p>
