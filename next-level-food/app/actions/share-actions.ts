@@ -1,14 +1,13 @@
 'use server';
+import { redirect } from 'next/navigation';
+
+import { MEALS } from '@/app/configs/routes';
 
 export async function shareMeal(event: FormData) {
-  const meal = {
-    creator: event.get('name'),
-    creator_email: event.get('email'),
-    title: event.get('title'),
-    summary: event.get('summary'),
-    instructions: event.get('instructions'),
-    image: event.get('image'),
-  };
+  await fetch('http://localhost:3000/api/meals/save', {
+    method: 'POST',
+    body: event,
+  });
 
-  console.log(meal);
+  redirect(MEALS);
 }
