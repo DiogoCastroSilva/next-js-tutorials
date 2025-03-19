@@ -1,5 +1,7 @@
 import { Fragment } from 'react';
 
+import ImagePicker from '@/app/components/images-picker/images-picker';
+
 import styles from './page.module.css';
 
 export default function ShareMealPage() {
@@ -36,11 +38,11 @@ export default function ShareMealPage() {
             <textarea
               id="instructions"
               name="instructions"
-              rows="10"
+              rows={10}
               required
             ></textarea>
           </p>
-          IMAGE PICKER
+          <ImagePicker name="meal-image" label="Meal Image" />
           <p className={styles.actions}>
             <button type="submit">Share Meal</button>
           </p>
