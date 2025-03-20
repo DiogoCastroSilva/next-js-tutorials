@@ -2,6 +2,7 @@
 import { redirect } from 'next/navigation';
 
 import { MEALS } from '@/app/configs/routes';
+import { revalidatePath } from 'next/cache';
 
 export async function shareMeal(event: FormData) {
   try {
@@ -14,6 +15,7 @@ export async function shareMeal(event: FormData) {
       throw new Error(reply.statusText);
     }
 
+    revalidatePath(MEALS);
     redirect(MEALS);
   } catch {
     throw new Error('Failed to share meal');

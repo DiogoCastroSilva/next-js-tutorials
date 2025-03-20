@@ -7,6 +7,8 @@ import Meals from '@/app/components/meals/meals';
 import styles from './page.module.css';
 import LoadingMeals from '@/app/components/loading-meals/loading-meals';
 
+export const dynamic = 'force-dynamic';
+
 export default function MealsPage() {
   return (
     <Fragment>
