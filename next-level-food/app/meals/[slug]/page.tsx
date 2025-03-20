@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { IMeal } from '@/app/contracts/meal';
+import { API_ENDPOINT } from '@/app/configs/api';
 
 import styles from './page.module.css';
 
@@ -12,7 +13,7 @@ export default async function MealDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const data = await fetch(`http://localhost:3000/api/meals/${slug}`);
+  const data = await fetch(`${API_ENDPOINT}/api/meals/${slug}`);
   const meal = (await data.json()) as IMeal;
 
   if (!meal) {

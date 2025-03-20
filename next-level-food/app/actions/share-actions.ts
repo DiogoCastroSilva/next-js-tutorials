@@ -1,12 +1,13 @@
 'use server';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 import { MEALS } from '@/app/configs/routes';
-import { revalidatePath } from 'next/cache';
+import { API_ENDPOINT } from '@/app/configs/api';
 
 export async function shareMeal(event: FormData) {
   try {
-    const reply = await fetch('http://localhost:3000/api/meals/save', {
+    const reply = await fetch(`${API_ENDPOINT}/api/meals/save`, {
       method: 'POST',
       body: event,
     });
