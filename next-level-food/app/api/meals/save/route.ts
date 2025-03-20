@@ -2,10 +2,20 @@ import fs from 'fs';
 import path from 'path';
 import slugify from 'slugify';
 import xss from 'xss';
+import { z } from 'zod';
 
-import db from '../../db';
+import { IMAGE_SCHEMA } from '@/app/utils/schema-validation';
+import db from '@/app/api/db';
 
 const publicPath = path.join(`${process.cwd()}/public`);
+
+const MealSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  title: z.string(),
+  summary: z.string(),
+  instructions: z.string(),
+});
 
 const saveImageInPublic = async (image: File, fileName: string) => {
   const stream = fs.createWriteStream(`${publicPath}/images/${fileName}`);
@@ -21,21 +31,22 @@ const saveImageInPublic = async (image: File, fileName: string) => {
 export async function POST(request: Request) {
   try {
     const data = await request.formData();
+    const newInstructions = xss(data.get('instructions') as string);
 
-    // TODO: Add validation
-    const name = data.get('name') as string;
-    const email = data.get('email') as string;
-    const title = data.get('title') as string;
-    const summary = data.get('summary') as string;
-    const newInstructions = data.get('instructions') as string;
-    const image = data.get('image') as File;
+    const image = IMAGE_SCHEMA.parse(data.get('image'));
+    const { name, email, title, summary, instructions } = MealSchema.parse({
+      name: data.get('name'),
+      email: data.get('email'),
+      title: data.get('title'),
+      summary: data.get('summary'),
+      image: data.get('image'),
+      instructions: newInstructions,
+    });
 
     const slug = slugify(title, { lower: true });
-    const instructions = xss(newInstructions);
 
     const imageExtension = image.name.split('.').pop();
     const fileName = `${slug}.${imageExtension}`;
-
     const imageLocation = `/images/${fileName}`;
 
     const meals = {
