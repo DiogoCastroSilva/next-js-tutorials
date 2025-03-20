@@ -22,6 +22,18 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Application
+
+![Home page](../images/next-level-food/home.png)
+
+![Meals page](../images/next-level-food/meals.png)
+
+![Details page](../images/next-level-food/details.png)
+
+![Share page](../images/next-level-food/share.png)
+
+![Community page](../images/next-level-food/community.png)
+
 ## Resources
 
 - [nextjs-complete-guide-course-resources](https://github.com/mschwarzmueller/nextjs-complete-guide-course-resources)
