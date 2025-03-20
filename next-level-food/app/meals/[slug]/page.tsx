@@ -1,11 +1,31 @@
 import { Fragment } from 'react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 
 import { IMeal } from '@/app/contracts/meal';
 import { API_ENDPOINT } from '@/app/configs/api';
 
 import styles from './page.module.css';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const data = await fetch(`${API_ENDPOINT}/api/meals/${slug}`);
+  const meal = (await data.json()) as IMeal;
+
+  if (!meal) {
+    notFound();
+  }
+
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
 
 export default async function MealDetailsPage({
   params,

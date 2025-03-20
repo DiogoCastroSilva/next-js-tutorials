@@ -1,4 +1,5 @@
 import { Fragment, Suspense } from 'react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { SHARE_MEALS } from '@/app/configs/routes';
@@ -8,6 +9,11 @@ import styles from './page.module.css';
 import LoadingMeals from '@/app/components/loading-meals/loading-meals';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'All Meals - NextLevel Food',
+  description: 'Browse all available meals and choose your favorite one.',
+};
 
 export default function MealsPage() {
   return (

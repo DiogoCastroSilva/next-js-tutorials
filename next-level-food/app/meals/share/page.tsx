@@ -1,10 +1,16 @@
 import { Fragment } from 'react';
+import { Metadata } from 'next';
 
 import ImagePicker from '@/app/components/images-picker/images-picker';
 import MealsFormSubmitButton from '@/app/components/meals-form-submit-button/meals-form-submit-button';
 import { shareMeal } from '@/app/actions/share-actions';
 
 import styles from './page.module.css';
+
+export const metadata: Metadata = {
+  title: 'Share Meal - NextLevel Food',
+  description: 'Share your favorite meal with the world and let others enjoy it too.',
+};
 
 export default function ShareMealPage() {
   return (
