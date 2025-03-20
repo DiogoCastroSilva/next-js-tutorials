@@ -19,7 +19,7 @@ export default function MealItem({
         <div className={styles.image}>
           <Image src={image} alt={title} fill />
         </div>
-        <div className={styles['header-text']}>
+        <div className={styles.headerText}>
           <h2>{title}</h2>
           <p>by {creator}</p>
         </div>
