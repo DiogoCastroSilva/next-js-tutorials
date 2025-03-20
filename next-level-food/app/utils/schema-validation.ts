@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const IMAGE_SCHEMA = z
+const ImageSchema = z
   .instanceof(File)
   .refine(
     (file) =>
@@ -17,4 +17,14 @@ const IMAGE_SCHEMA = z
     message: 'Image invalid size',
   });
 
-export { IMAGE_SCHEMA };
+const MealSchema = z.object({
+  name: z.string({ invalid_type_error: 'Please enter a valid name.' }),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
+  title: z.string({ invalid_type_error: 'Please enter a valid title.' }),
+  summary: z.string({ invalid_type_error: 'Please enter a valid summary.' }),
+  instructions: z.string({
+    invalid_type_error: 'Please enter valid instructions.',
+  }),
+});
+
+export { ImageSchema, MealSchema };

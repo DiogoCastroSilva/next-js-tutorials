@@ -2,20 +2,11 @@ import fs from 'fs';
 import path from 'path';
 import slugify from 'slugify';
 import xss from 'xss';
-import { z } from 'zod';
 
-import { IMAGE_SCHEMA } from '@/app/utils/schema-validation';
+import { ImageSchema, MealSchema } from '@/app/utils/schema-validation';
 import db from '@/app/api/db';
 
 const publicPath = path.join(`${process.cwd()}/public`);
-
-const MealSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  title: z.string(),
-  summary: z.string(),
-  instructions: z.string(),
-});
 
 const saveImageInPublic = async (image: File, fileName: string) => {
   const stream = fs.createWriteStream(`${publicPath}/images/${fileName}`);
@@ -33,7 +24,7 @@ export async function POST(request: Request) {
     const data = await request.formData();
     const newInstructions = xss(data.get('instructions') as string);
 
-    const image = IMAGE_SCHEMA.parse(data.get('image'));
+    const image = ImageSchema.parse(data.get('image'));
     const { name, email, title, summary, instructions } = MealSchema.parse({
       name: data.get('name'),
       email: data.get('email'),
@@ -84,7 +75,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.log(error);
 
-    return new Response(JSON.stringify(null), {
+    return new Response(JSON.stringify(error), {
       status: 500,
       headers: {
         'Content-Type': 'application/json',
