@@ -1,8 +1,13 @@
+interface IAuthor {
+  name: string;
+}
+
 interface INews {
   id: number;
   title: string;
-  authors: string[];
+  authors: IAuthor[];
   image_url: string;
+  url: string;
   news_site: string;
   summary: string;
   publish_at: string;
