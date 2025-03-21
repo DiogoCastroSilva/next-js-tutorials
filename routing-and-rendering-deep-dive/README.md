@@ -9,9 +9,9 @@ List of exercices for this tutorial:
 - [x] Create the following routes
    - [x] News page
       - [x] News Details
-- [] Create a main header with the following links
-   - [] Home page
-   - [] News page
+- [X] Create a main header with the following links
+   - [X] Home page
+   - [X] News page
 
 ## Next Js
 

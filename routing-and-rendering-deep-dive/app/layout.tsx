@@ -1,6 +1,8 @@
-import type { Metadata } from 'next';
+import NavHeader from '@/app/components/nav-header/nav-header';
 
 import './globals.css';
+
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Routing & Rendering: Deep Dive',
@@ -14,7 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div id="page">
+          <NavHeader />
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
