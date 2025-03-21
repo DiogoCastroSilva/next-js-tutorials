@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 export default async function NewsPage() {
   return (
     <main className={styles.container}>
+      <h1>Current News</h1>
       <NewsList />
     </main>
   );
