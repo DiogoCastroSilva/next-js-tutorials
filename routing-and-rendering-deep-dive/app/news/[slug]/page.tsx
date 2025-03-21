@@ -37,14 +37,14 @@ export default async function NewsDetailsPage({
   const meal = (await data.json()) as INews;
 
   if (!meal) {
-    notFound();
+    return notFound();
   }
 
   const { title, image_url, authors, summary, url } = meal;
 
   return (
     <main className={styles.container}>
-      <article className={styles.article}>
+      <article className="news-article">
         <div className={styles.imageContainer}>
           <Image src={image_url} alt={title} objectFit="cover" fill />
         </div>
