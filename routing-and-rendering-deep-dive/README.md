@@ -6,9 +6,9 @@ This is the second project from the course [Next.js 15 & React - The Complete Gu
 
 List of exercices for this tutorial:
 
-- [] Create the following routes
-   - [] News page
-      - [] News Details
+- [x] Create the following routes
+   - [x] News page
+      - [x] News Details
 - [] Create a main header with the following links
    - [] Home page
    - [] News page
