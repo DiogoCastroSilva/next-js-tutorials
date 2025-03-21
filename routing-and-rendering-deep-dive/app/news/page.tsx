@@ -2,8 +2,6 @@ import { Metadata } from 'next';
 
 import NewsList from '@/app/components/news-list/news-list';
 
-import styles from './page.module.css';
-
 export const metadata: Metadata = {
   title: 'News',
   description: 'Get the latest news from around the world.',
@@ -11,7 +9,7 @@ export const metadata: Metadata = {
 
 export default async function NewsPage() {
   return (
-    <main className={styles.container}>
+    <main>
       <h1>Current News</h1>
       <NewsList />
     </main>

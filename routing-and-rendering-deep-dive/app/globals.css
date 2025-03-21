@@ -128,7 +128,7 @@ ul {
 }
 
 .news-list a:hover {
-  background-color: #2d2d2b;
+  background-color: rgba(17.65%, 17.65%, 16.86%, 0.2);
 }
 
 .modal-backdrop {
