@@ -15,7 +15,6 @@ export default function NewsCard({ id, image_url, title, summary }: INews) {
           className={styles.image}
           src={image_url}
           alt={summary}
-          objectFit="cover"
           fill
         />
       </div>
