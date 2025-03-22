@@ -11,17 +11,20 @@ export default function ArchivePage() {
   const currentMonth = today.getMonth() + 1;
   const currentDay = today.getDate();
 
-  const transformedYears = availableYears.map(
-    (year) => `${year}-${convertDate(currentMonth)}-${convertDate(currentDay)}`
-  );
+  const transformedYears = availableYears.map((year) => ({
+    label: year,
+    link: `/archive/${year}-${convertDate(currentMonth)}-${convertDate(
+      currentDay
+    )}`,
+  }));
 
   return (
-    <header>
+    <header id="archive-header">
       <nav>
         <ul>
-          {transformedYears.map((year) => (
-            <li key={year}>
-              <Link href={`/archive/${year}`}>{year}</Link>
+          {transformedYears.map(({ label, link }) => (
+            <li key={link}>
+              <Link href={link}>{label}</Link>
             </li>
           ))}
         </ul>

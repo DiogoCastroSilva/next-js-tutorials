@@ -9,7 +9,7 @@ export default function Layout({
 }) {
   return (
     <main>
-      <h1>News Archive</h1>
+      <h1>News Archived on this day</h1>
       <section id="archive-filter">{archive}</section>
       <section id="archive-latest">{latest}</section>
     </main>
