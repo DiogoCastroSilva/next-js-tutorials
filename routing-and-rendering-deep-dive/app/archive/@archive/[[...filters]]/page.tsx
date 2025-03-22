@@ -12,28 +12,41 @@ const availableYears = [2024, 2023, 2022, 2021, 2020];
 export default async function ArchivePage({
   params,
 }: {
-  params: Promise<{ year: string }>;
+  params: Promise<{ filters: string[] }>;
 }) {
   const today = getDateNow();
   const currentMonth = today.getMonth() + 1;
   const currentDay = today.getDate();
 
-  const transformedYears = availableYears.map((year) => ({
-    label: year,
-    link: `/archive/${year}-${convertDate(currentMonth)}-${convertDate(
+  const transformedYears = availableYears.map((year) => {
+    const yearFilter = `${year}-${convertDate(currentMonth)}-${convertDate(
       currentDay
-    )}`,
-  }));
+    )}`;
 
-  const { year } = await params;
+    return {
+      label: year,
+      link: `/archive/${yearFilter}`,
+      filter: yearFilter,
+    };
+  });
+
+  const { filters } = await params;
+  const year = filters?.[0];
+
+  if (year && !transformedYears.find(({ filter }) => filter === year)) {
+    console.log(year, transformedYears);
+    throw new Error('Invalid filter...');
+  }
 
   const res = await fetch(`${API_ENDPOINT}/api/news/year/${year}`);
   const news = (await res.json()) as INewsList;
 
-  let NewsContent = <NewsList news={news} />;
+  let NewsContent;
 
   if (!Array.isArray(news) || news.length <= 0) {
     NewsContent = <p>No news available for the selected time</p>;
+  } else {
+    NewsContent = <NewsList news={news} />;
   }
 
   return (
