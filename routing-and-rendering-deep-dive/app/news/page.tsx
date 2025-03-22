@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import NewsList from '@/app/components/news-list/news-list';
+import NewsList from '@/app/components/news-list-container/news-list-container';
 
 export const metadata: Metadata = {
   title: 'News',
