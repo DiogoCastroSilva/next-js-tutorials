@@ -12,5 +12,9 @@ export default async function FilteredNewsPage({
   const res = await fetch(`${API_ENDPOINT}/api/news/year/${year}`);
   const news = (await res.json()) as INewsList;
 
+  if (!Array.isArray(news) || news.length <= 0) {
+    return <p>No news available for the selected time</p>;
+  }
+
   return <NewsList news={news} />;
 }

@@ -17,6 +17,10 @@ export default async function LatestPage() {
   const res = await fetch(`${API_ENDPOINT}/api/news/year/${year}`);
   const news = (await res.json()) as INewsList;
 
+  if (!Array.isArray(news) || news?.length <= 0) {
+    return <p>No news available for the selected time</p>;
+  }
+
   return (
     <>
       <h1>Latest</h1>
