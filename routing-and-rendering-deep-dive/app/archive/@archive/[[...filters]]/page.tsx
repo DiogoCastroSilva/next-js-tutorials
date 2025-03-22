@@ -4,6 +4,7 @@ import { getDateNow, convertDate } from '@/app/utils/date';
 import { API_ENDPOINT } from '@/app/configs/api';
 import { INewsList } from '@/app/contracts/news';
 import NewsList from '@/app/components/news-list/news-list';
+import { ARCHIVE } from '@/app/configs/routes';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,7 +26,7 @@ export default async function ArchivePage({
 
     return {
       label: year,
-      link: `/archive/${yearFilter}`,
+      link: `${ARCHIVE}/${yearFilter}`,
       filter: yearFilter,
     };
   });

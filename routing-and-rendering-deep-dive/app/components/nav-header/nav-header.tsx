@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-import { HOME, NEWS } from '@/app/configs/routes';
+import { HOME, NEWS, ARCHIVE } from '@/app/configs/routes';
+import NavLink from '@/app/components/nav-link/nav-link';
 
 export default function NavHeader() {
   return (
@@ -11,7 +12,10 @@ export default function NavHeader() {
       <nav>
         <ul>
           <li>
-            <Link href={NEWS}>News</Link>
+            <NavLink href={NEWS}>News</NavLink>
+          </li>
+          <li>
+            <NavLink href={ARCHIVE}>Archive</NavLink>
           </li>
         </ul>
       </nav>
