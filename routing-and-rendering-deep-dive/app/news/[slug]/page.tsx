@@ -45,7 +45,7 @@ export default async function NewsDetailsPage({
 
   return (
     <main className={styles.container}>
-      <article className="news-article">
+      <article className={styles.newsArticle}>
         <Link href={`${NEWS}/${slug}/image`} className={styles.imageContainer}>
           <Image src={image_url} alt={title} fill />
         </Link>

@@ -25,3 +25,9 @@
   color: #0070f3;
   text-decoration: none;
 }
+
+.newsArticle img {
+  width: 7rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}

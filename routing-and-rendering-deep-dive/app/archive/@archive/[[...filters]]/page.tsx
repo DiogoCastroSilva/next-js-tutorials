@@ -6,6 +6,8 @@ import { INewsList } from '@/app/contracts/news';
 import NewsList from '@/app/components/news-list/news-list';
 import { ARCHIVE } from '@/app/configs/routes';
 
+import styles from './page.module.css';
+
 export const dynamic = 'force-dynamic';
 
 const availableYears = [2024, 2023, 2022, 2021, 2020];
@@ -52,7 +54,7 @@ export default async function ArchivePage({
 
   return (
     <>
-      <header id="archive-header">
+      <header className={styles.archiveHeader}>
         <nav>
           <ul>
             {transformedYears.map(({ label, link }) => (
