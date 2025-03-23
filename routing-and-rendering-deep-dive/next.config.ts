@@ -12,6 +12,13 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'cdn.tlpnetwork.com',
+        port: '',
+        pathname: '/**',
+        search: '',
+      },
+      {
+        protocol: 'https',
         hostname: 'www.nasaspaceflight.com',
         port: '',
         pathname: '/wp-content/uploads/**',

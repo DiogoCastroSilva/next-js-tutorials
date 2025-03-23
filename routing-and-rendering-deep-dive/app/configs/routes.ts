@@ -1,4 +1,5 @@
 const HOME = '/';
 const NEWS = '/news';
+const ARCHIVE = '/archive';
 
-export { HOME, NEWS };
+export { HOME, NEWS, ARCHIVE };
