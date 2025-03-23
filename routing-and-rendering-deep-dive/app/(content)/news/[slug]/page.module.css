@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.imageContainer {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 350px;
+}
+
+.content {
+  padding: 1rem 3rem;
+}
+
+.articleLink {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.newsArticle img {
+  width: 7rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
