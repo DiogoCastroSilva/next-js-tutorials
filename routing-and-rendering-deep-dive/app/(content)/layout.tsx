@@ -1,6 +1,6 @@
 import NavHeader from '@/app/components/nav-header/nav-header';
 
-import './globals.css';
+import '../globals.css';
 
 import type { Metadata } from 'next';
 
@@ -19,8 +19,8 @@ export default function RootLayout({
       <body>
         <div id="page">
           <NavHeader />
+          {children}
         </div>
-        {children}
       </body>
     </html>
   );
