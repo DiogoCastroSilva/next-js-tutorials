@@ -1,55 +1,25 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 
-import { getDateNow, convertDate } from '@/app/utils/date';
-import { API_ENDPOINT } from '@/app/configs/api';
-import { INewsList } from '@/app/contracts/news';
-import NewsList from '@/app/components/news-list/news-list';
-import { ARCHIVE } from '@/app/configs/routes';
+import { trasnformYearsToFilters } from '@/app/utils/filters';
+import FilteredContent from '@/app/(content)/archive/@archive/[[...filters]]/filtered-content';
 
 import styles from './page.module.css';
+
+import type { IArchivePage } from './contracts';
 
 export const dynamic = 'force-dynamic';
 
 const availableYears = [2024, 2023, 2022, 2021, 2020];
 
-export default async function ArchivePage({
-  params,
-}: {
-  params: Promise<{ filters: string[] }>;
-}) {
-  const today = getDateNow();
-  const currentMonth = today.getMonth() + 1;
-  const currentDay = today.getDate();
-
-  const transformedYears = availableYears.map((year) => {
-    const yearFilter = `${year}-${convertDate(currentMonth)}-${convertDate(
-      currentDay
-    )}`;
-
-    return {
-      label: year,
-      link: `${ARCHIVE}/${yearFilter}`,
-      filter: yearFilter,
-    };
-  });
-
+export default async function ArchivePage({ params }: IArchivePage) {
   const { filters } = await params;
   const year = filters?.[0];
 
+  const transformedYears = trasnformYearsToFilters(availableYears);
+
   if (year && !transformedYears.find(({ filter }) => filter === year)) {
-    console.log(year, transformedYears);
     throw new Error('Invalid filter...');
-  }
-
-  const res = await fetch(`${API_ENDPOINT}/api/news/year/${year}`);
-  const news = (await res.json()) as INewsList;
-
-  let NewsContent;
-
-  if (!Array.isArray(news) || news.length <= 0) {
-    NewsContent = <p>No news available for the selected time</p>;
-  } else {
-    NewsContent = <NewsList news={news} />;
   }
 
   return (
@@ -65,7 +35,9 @@ export default async function ArchivePage({
           </ul>
         </nav>
       </header>
-      {NewsContent}
+      <Suspense fallback={<p>Loading filtered news...</p>}>
+        <FilteredContent year={year} />
+      </Suspense>
     </>
   );
 }
