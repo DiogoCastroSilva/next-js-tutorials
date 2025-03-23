@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { API_ENDPOINT } from '@/app/configs/api';
 import { INews } from '@/app/contracts/news';
+import { NEWS } from '@/app/configs/routes';
 
 import styles from './page.module.css';
-import Link from 'next/link';
 
 export async function generateMetadata({
   params,
@@ -45,9 +46,9 @@ export default async function NewsDetailsPage({
   return (
     <main className={styles.container}>
       <article className="news-article">
-        <div className={styles.imageContainer}>
-          <Image src={image_url} alt={title} objectFit="cover" fill />
-        </div>
+        <Link href={`${NEWS}/${slug}/image`} className={styles.imageContainer}>
+          <Image src={image_url} alt={title} fill />
+        </Link>
         <div className={styles.content}>
           <h1>{title}</h1>
           <p>By {authors?.[0]?.name}</p>
