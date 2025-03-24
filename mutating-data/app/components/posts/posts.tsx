@@ -1,18 +1,19 @@
 'use client';
+import { useOptimistic } from 'react';
 
 import { formatDate } from '@/lib/format';
 import { tooglePostLikeStatus } from '@/app/actions/posts';
+import Image from 'next/image';
 
 import LikeButton from '../like-icon';
 
 import type { IPost, IPosts } from './contracts';
-import { useOptimistic } from 'react';
 
 function Post({ post, action }: IPost) {
   return (
     <article className="post">
       <div className="post-image">
-        <img src={post.image} alt={post.title} />
+        <Image src={post.image} alt={post.title} width={80} height={80} />
       </div>
       <div className="post-content">
         <header>

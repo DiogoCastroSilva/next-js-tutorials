@@ -1,6 +1,6 @@
 # Mutating Data
 
-This is the third project from the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller)
+This is the third project from the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller) where we use server actions and mutations by creatian a Blog. This blog allows the user to create new posts and like post in a feed.
 
 ## Next Js
 
@@ -24,6 +24,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Application
 
+[Home page](/images/mutating-data/home.png)
+
+[Feed page](/images/mutating-data/feed.png)
+
+[New Post page](/images/mutating-data/new-post.png)
 
 ## Resources
 
