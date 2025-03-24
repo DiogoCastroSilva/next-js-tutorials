@@ -1,4 +1,5 @@
 import { formatDate } from '@/lib/format';
+import { tooglePostLikeStatus } from '@/app/actions/posts';
 
 import LikeButton from '../like-icon';
 
@@ -22,7 +23,12 @@ function Post({ post }: IPost) {
             </p>
           </div>
           <div>
-            <LikeButton />
+            <form
+              action={tooglePostLikeStatus.bind(null, post.id)}
+              className={post.isLiked ? 'liked' : ''}
+            >
+              <LikeButton />
+            </form>
           </div>
         </header>
         <p>{post.content}</p>

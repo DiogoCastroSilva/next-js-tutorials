@@ -5,6 +5,7 @@ type TPost = {
   userFirstName: string;
   createdAt: string;
   content: string;
+  isLiked: boolean;
 };
 
 interface IPost {
