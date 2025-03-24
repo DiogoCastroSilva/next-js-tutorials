@@ -24,11 +24,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Application
 
-[Home page](/images/mutating-data/home.png)
+[Home page](../images/mutating-data/home.png)
 
-[Feed page](/images/mutating-data/feed.png)
+[Feed page](../images/mutating-data/feed.png)
 
-[New Post page](/images/mutating-data/new-post.png)
+[New Post page](../images/mutating-data/new-post.png)
 
 ## Resources
 
