@@ -5,10 +5,13 @@ type TPost = {
   userFirstName: string;
   createdAt: string;
   content: string;
+  isLiked: boolean;
+  likes: number;
 };
 
 interface IPost {
   post: TPost;
+  action: (postId: number) => Promise<void>;
 }
 
 interface IPosts {

@@ -1,10 +1,14 @@
+'use client';
+
 import { formatDate } from '@/lib/format';
+import { tooglePostLikeStatus } from '@/app/actions/posts';
 
 import LikeButton from '../like-icon';
 
 import type { IPost, IPosts } from './contracts';
+import { useOptimistic } from 'react';
 
-function Post({ post }: IPost) {
+function Post({ post, action }: IPost) {
   return (
     <article className="post">
       <div className="post-image">
@@ -22,7 +26,12 @@ function Post({ post }: IPost) {
             </p>
           </div>
           <div>
-            <LikeButton />
+            <form
+              action={action.bind(null, post.id)}
+              className={post.isLiked ? 'liked' : ''}
+            >
+              <LikeButton />
+            </form>
           </div>
         </header>
         <p>{post.content}</p>
@@ -32,15 +41,43 @@ function Post({ post }: IPost) {
 }
 
 export default function Posts({ posts }: IPosts) {
-  if (!posts || posts.length === 0) {
+  const [optimisticPosts, updateOptimisticPosts] = useOptimistic(
+    posts,
+    (prevPosts, updatedPostId: number) => {
+      const updatedPostIndex = prevPosts.findIndex(
+        (post) => post.id === updatedPostId
+      );
+
+      if (updatedPostIndex === -1) {
+        return prevPosts;
+      }
+
+      const updatedPost = { ...prevPosts[updatedPostIndex] };
+      updatedPost.likes += updatedPost.isLiked ? -1 : 1;
+      updatedPost.isLiked = !updatedPost.isLiked;
+
+      return [
+        ...prevPosts.slice(0, updatedPostIndex),
+        updatedPost,
+        ...prevPosts.slice(updatedPostIndex + 1),
+      ];
+    }
+  );
+
+  if (!optimisticPosts || optimisticPosts.length === 0) {
     return <p>There are no posts yet. Maybe start sharing some?</p>;
+  }
+
+  async function handleLike(postId: number) {
+    updateOptimisticPosts(postId);
+    await tooglePostLikeStatus(postId);
   }
 
   return (
     <ul className="posts">
-      {posts.map((post) => (
+      {optimisticPosts.map((post) => (
         <li key={post.id}>
-          <Post post={post} />
+          <Post post={post} action={handleLike} />
         </li>
       ))}
     </ul>
