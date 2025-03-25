@@ -1,9 +1,14 @@
 import Messages from '@/app/components/messages';
 
+export const dynamic = 'force-dynamic';
+
 export default async function MessagesPage() {
-  const response = await fetch('http://localhost:8080/messages', {
-    next: { revalidate: 5 },
-  });
+  const response = await fetch(
+    'http://localhost:8080/messages'
+    //   , {
+    //   next: { revalidate: 5 },
+    // }
+  );
   const messages = await response.json();
 
   if (!messages || messages.length === 0) {

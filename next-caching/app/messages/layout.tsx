@@ -5,9 +5,7 @@ export default async function MessagesLayout({
 }: {
   children: ReactNode;
 }) {
-  const response = await fetch('http://localhost:8080/messages', {
-    next: { revalidate: 5 },
-  });
+  const response = await fetch('http://localhost:8080/messages');
   const messages = await response.json();
   const totalMessages = messages.length;
 
