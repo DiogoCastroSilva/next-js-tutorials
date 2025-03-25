@@ -24,6 +24,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Application
 
+![Home page](../images//next-caching/home.png)
+
+![Messages page](../images/next-caching/messages.png)
+
+![New Message page](../images/next-caching/new-message.png)
+
 ## Resources
 
 - [nextjs-complete-guide-course-resources](https://github.com/mschwarzmueller/nextjs-complete-guide-course-resources)
