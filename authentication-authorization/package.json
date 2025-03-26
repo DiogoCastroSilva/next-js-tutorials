@@ -9,18 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "@lucia-auth/adapter-sqlite": "^3.0.2",
+    "better-sqlite3": "^9.4.3",
+    "lucia": "^3.2.2",
     "next": "15.2.4",
-    "better-sqlite3": "^9.4.3"
+    "react-dom": "^19.0.0",
+    "react": "^19.0.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^20",
-    "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@types/react": "^19",
     "eslint-config-next": "15.2.4",
-    "@eslint/eslintrc": "^3"
+    "eslint": "^9",
+    "typescript": "^5"
   }
 }
