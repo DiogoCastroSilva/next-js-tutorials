@@ -1,7 +1,9 @@
 'use server';
+import { redirect } from 'next/navigation';
 
 import { hashUserPassword } from '@/lib/hash';
 import { createUser } from '@/lib/user';
+import { createAuthSession } from '@/lib/auth';
 
 import type { IFormState } from './contracts';
 
@@ -37,11 +39,13 @@ export async function signup(
     return { errors: state.errors };
   }
 
-  const hashedPassword = hashUserPassword(user.password);
-
   try {
-    createUser(user.email, hashedPassword);
+    const hashedPassword = hashUserPassword(user.password);
+    const id = createUser(user.email, hashedPassword);
+    await createAuthSession(id?.toString());
   } catch (error) {
     throw error;
   }
+
+  redirect('/training');
 }
