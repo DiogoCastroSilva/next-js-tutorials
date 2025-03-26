@@ -1,5 +1,12 @@
 'use client';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Error creating a new Post',
+  description: 'Creating a new post for our community was not possible!',
+};
+
 export default function NewPostError({ error }: { error: Error }) {
   return (
     <>

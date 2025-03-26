@@ -8,6 +8,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Environment Variables
+Add the following environment variables to your .env file:
+
+```
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME="..." # Your Cloudinary cloud name
+CLOUDINARY_API_KEY="..." # Your Cloudinary secret key
+CLOUDINARY_API_SECRET="..." # Your Cloudinary API secret
+```
+
+You'll need to set those on your production environment as well.
+
+### Run project locally
 First, run the development server:
 
 ```bash

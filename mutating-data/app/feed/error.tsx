@@ -1,5 +1,12 @@
 'use client';
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Error displaying our Posts',
+  description: 'Somethign went wrong displaying our cummunity posts!',
+};
+
 export default function FeedError() {
   return (
     <>
