@@ -8,10 +8,12 @@ export default function Header() {
     <header id="main-header">
       <Link href="/">
         <Image
-          src={logo.src}
+          src={logo}
           alt="Mobile phone with posts feed on it"
-          width={80}
-          height={80}
+          height={100}
+          width={100}
+          // sizes='10vw'
+          priority
         />
       </Link>
       <nav>

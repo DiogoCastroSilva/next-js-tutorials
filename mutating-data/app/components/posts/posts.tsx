@@ -4,6 +4,7 @@ import { useOptimistic } from 'react';
 import { formatDate } from '@/lib/format';
 import { tooglePostLikeStatus } from '@/app/actions/posts';
 import Image from 'next/image';
+import { cloudinaryImageLoader } from '@/app/utils/cloudinary-images';
 
 import LikeButton from '../like-icon';
 
@@ -13,7 +14,13 @@ function Post({ post, action }: IPost) {
   return (
     <article className="post">
       <div className="post-image">
-        <Image src={post.image} alt={post.title} width={80} height={80} />
+        <Image
+          loader={cloudinaryImageLoader}
+          src={post.image}
+          alt={post.title}
+          width={200}
+          height={150}
+        />
       </div>
       <div className="post-content">
         <header>
