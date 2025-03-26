@@ -13,7 +13,7 @@ function Post({ post, action }: IPost) {
   return (
     <article className="post">
       <div className="post-image">
-        <Image src={post.image} alt={post.title} width={80} height={80} />
+        <Image src={post.image} alt={post.title} fill />
       </div>
       <div className="post-content">
         <header>
