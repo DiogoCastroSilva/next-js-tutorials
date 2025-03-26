@@ -3,17 +3,34 @@ import { useOptimistic } from 'react';
 
 import { formatDate } from '@/lib/format';
 import { tooglePostLikeStatus } from '@/app/actions/posts';
-import Image from 'next/image';
+import Image, { ImageLoaderProps } from 'next/image';
 
 import LikeButton from '../like-icon';
 
 import type { IPost, IPosts } from './contracts';
 
+const cloudinaryImageLoader = (config: ImageLoaderProps) => {
+  /**
+   * Image config example:
+   * src: https://res.cloudinary.com/.../image/upload/.../folder/image-name.jpg
+   */
+  const [imageDomain, imageLocation] = config?.src?.split('upload/') || ['', ''];
+  const couldinaryConfig = `w_200,q_${config.quality || 50}`;
+
+  return `${imageDomain}upload/${couldinaryConfig}/${imageLocation}`;
+};
+
 function Post({ post, action }: IPost) {
   return (
     <article className="post">
       <div className="post-image">
-        <Image src={post.image} alt={post.title} fill />
+        <Image
+          loader={cloudinaryImageLoader}
+          src={post.image}
+          alt={post.title}
+          width={200}
+          height={150}
+        />
       </div>
       <div className="post-content">
         <header>
