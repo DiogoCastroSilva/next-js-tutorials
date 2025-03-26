@@ -1,8 +1,21 @@
+import { useActionState } from 'react';
 import Link from 'next/link';
 
+import { signup } from '@/app/actions/auth-action';
+import { IFormState } from '@/app/actions/contracts';
+
+const initialState: IFormState = {
+  errors: {},
+};
+
 export default function AuthForm() {
+  const [formState, formAction] = useActionState<
+    IFormState | undefined,
+    FormData
+  >(signup, initialState);
+
   return (
-    <form id="auth-form">
+    <form id="auth-form" action={formAction}>
       <div>
         <img src="/images/auth-icon.jpg" alt="A lock icon" />
       </div>
@@ -14,6 +27,13 @@ export default function AuthForm() {
         <label htmlFor="password">Password</label>
         <input type="password" name="password" id="password" />
       </p>
+      {formState?.errors && (
+        <ul id="form-errors">
+          {Object.keys(formState.errors).map((key) => (
+            <li key={key}>{formState?.errors?.[key]}</li>
+          ))}
+        </ul>
+      )}
       <p>
         <button type="submit">Create Account</button>
       </p>

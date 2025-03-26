@@ -15,12 +15,13 @@
     "better-sqlite3": "^9.4.3"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^20",
-    "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@types/react": "^19",
     "eslint-config-next": "15.2.4",
-    "@eslint/eslintrc": "^3"
+    "eslint": "^9",
+    "typescript": "^5"
   }
 }
