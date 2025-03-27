@@ -7,7 +7,6 @@ export default async function TrainingPage() {
   const session = await verifySession();
 
   if (!session) {
-    console.log('No access to training');
     redirect('/');
   }
 

@@ -26,7 +26,7 @@ export async function signup(_state: FormState, formData: FormData) {
 
     await createSession(id.toString());
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return {
       errors: {
@@ -44,8 +44,6 @@ export async function login(_state: FormState, formData: FormData) {
     const password = formData.get('password') as string;
 
     const existingUser = getUserByEmail(email);
-
-    console.log('user', existingUser);
 
     if (!existingUser) {
       return {
@@ -70,7 +68,7 @@ export async function login(_state: FormState, formData: FormData) {
 
     await createSession(existingUser.id.toString());
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return {
       errors: {
