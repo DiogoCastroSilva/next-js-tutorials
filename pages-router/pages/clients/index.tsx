@@ -1,6 +1,13 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Clients() {
+  const clients = [
+    { id: 'max', name: 'Max' },
+    { id: 'leo', name: 'Leo' },
+    { id: 'john', name: 'John' },
+  ];
+
   return (
     <>
       <Head>
@@ -12,6 +19,13 @@ export default function Clients() {
       <div>
         <main>
           <h1>The Clients List page</h1>
+          <ul>
+            {clients.map(({ id, name }) => (
+              <li key={id}>
+                <Link href={`/clients/${name}`}>{name}</Link>
+              </li>
+            ))}
+          </ul>
         </main>
       </div>
     </>

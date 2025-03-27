@@ -1,6 +1,6 @@
 # Next Level Food
 
-This is the six project from the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller). Where we will use the old Next JS way by using the Pages Router.
+This is the six project from the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller). Where we will use the old Next JS way by using the Pages Router. This contains how file routing works and how we can navigate to this pages.
 
 ## Next Js
 

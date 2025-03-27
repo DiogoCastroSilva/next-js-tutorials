@@ -1,6 +1,13 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 export default function Portfolio() {
+  const router = useRouter();
+
+  const handleLoadPortfolio = () => {
+    router.push('/portfolio/1');
+  };
+
   return (
     <>
       <Head>
@@ -12,6 +19,7 @@ export default function Portfolio() {
       <div>
         <main>
           <h1>The Portfolio page</h1>
+          <button onClick={handleLoadPortfolio}>Load portofoli 1</button>
         </main>
       </div>
     </>

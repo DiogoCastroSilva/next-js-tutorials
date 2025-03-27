@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 export default function ClientProjectItem() {
   const router = useRouter();
 
-  console.log(router.query?.id);
-  console.log(router.query?.projectid);
+  const projectId = router.query?.projectid;
+
+  console.log(router.query);
 
   return (
     <>
@@ -20,7 +21,7 @@ export default function ClientProjectItem() {
       </Head>
       <div>
         <main>
-          <h1>The Client project Item page</h1>
+          <h1>The Client project {projectId}</h1>
         </main>
       </div>
     </>

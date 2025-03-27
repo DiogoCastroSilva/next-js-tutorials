@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -12,6 +13,17 @@ export default function Home() {
       <div>
         <main>
           <h1>The Home page</h1>
+          <ul>
+            <li>
+              <Link href="/portfolio">Portfolio</Link>
+            </li>
+            <li>
+              <Link href="/clients">Clients</Link>
+            </li>
+            <li>
+              <Link href={`/blog/${new Date().getFullYear()}`}>Blog</Link>
+            </li>
+          </ul>
         </main>
       </div>
     </>
