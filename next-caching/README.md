@@ -1,4 +1,4 @@
-# Mutating Data
+# Next Caching
 
 This project is part of the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller). In this fourth project, we explore caching mechanisms in Next.js and React to optimize performance and enhance user experience. By leveraging these techniques, you'll gain a deeper understanding of how to efficiently manage data in modern web applications.
 
