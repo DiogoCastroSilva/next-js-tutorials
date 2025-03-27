@@ -1,8 +1,9 @@
 import { ReactNode } from 'react';
+import { Metadata } from 'next';
 
 import './globals.css';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Next Auth',
   description: 'Next.js Authentication',
 };

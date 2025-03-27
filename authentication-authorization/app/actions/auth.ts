@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation';
 
 import { FormState, SignupFormSchema } from '@/contracts/auth';
-import { createSession } from '@/lib/session';
+import { createSession, deleteSession } from '@/lib/session';
 import { createUser, getUserByEmail } from '@/lib/user';
 
 export async function signup(_state: FormState, formData: FormData) {
@@ -80,6 +80,12 @@ export async function login(_state: FormState, formData: FormData) {
   }
 
   redirect('/training');
+}
+
+export async function logout() {
+  await deleteSession();
+
+  redirect('/');
 }
 
 export async function auth(
