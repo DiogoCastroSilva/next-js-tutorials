@@ -7,10 +7,10 @@ This is the seven project from the course [Next.js 15 & React - The Complete Gui
 List of exercices for this tutorial:
 
 - [ ] Create the following routes
-  - [ ] Home page - Feature events
-  - [ ] Events page - All events available
-    - [ ] Events Details page
-    - [ ] Filtered Events page
+  - [X] Home page - Feature events
+  - [x] Events page - All events available
+    - [X] Events Details page
+    - [] Filtered Events page
 
 ## Next Js
 
