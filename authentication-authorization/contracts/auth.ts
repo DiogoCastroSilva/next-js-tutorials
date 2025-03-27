@@ -13,12 +13,20 @@ export const SignupFormSchema = z.object({
     .trim(),
 });
 
-export type FormState =
+interface IUser {
+  id: number;
+  email: string;
+  password: string;
+}
+
+type FormState =
   | {
-      errors?: {
+      errors: {
         email?: string[];
         password?: string[];
+        message?: string;
       };
-      message?: string;
     }
   | undefined;
+
+export type { FormState, IUser };

@@ -2,13 +2,17 @@
 import { useActionState } from 'react';
 import Link from 'next/link';
 
-import { signup } from '@/app/actions/auth';
+import { auth } from '@/app/actions/auth';
+import { FormState } from '@/contracts/auth';
 
-export default function AuthForm() {
-  const [state, action] = useActionState(signup, undefined);
+export default function AuthForm({ mode }: { mode: 'login' | 'signup' }) {
+  const [state, formAction] = useActionState<FormState, FormData>(
+    auth.bind(null, mode),
+    undefined
+  );
 
   return (
-    <form id="auth-form" action={action}>
+    <form id="auth-form" action={formAction}>
       <div>
         <img src="/images/auth-icon.jpg" alt="A lock icon" />
       </div>
@@ -25,17 +29,23 @@ export default function AuthForm() {
         <div>
           <p>Password must:</p>
           <ul>
-            {state.errors.password.map((error) => (
+            {state.errors.password?.map((error) => (
               <li key={error}>- {error}</li>
             ))}
           </ul>
         </div>
       )}
       <p>
-        <button type="submit">Create Account</button>
+        <button type="submit">
+          {mode === 'signup' && 'Create Account'}
+          {mode === 'login' && 'Login'}
+        </button>
       </p>
       <p>
-        <Link href="/">Login with existing account.</Link>
+        {mode === 'login' && <Link href="/?mode=signup">Create account.</Link>}
+        {mode === 'signup' && (
+          <Link href="/?mode=login">Login with existing account.</Link>
+        )}
       </p>
     </form>
   );

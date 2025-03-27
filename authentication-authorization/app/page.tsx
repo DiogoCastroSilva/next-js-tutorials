@@ -1,5 +1,15 @@
-import AuthForm from '@/app/components/auth-form';
+import { use } from 'react';
 
-export default async function Home() {
-  return <AuthForm />;
+import AuthForm from '@/app/components/auth-form';
+import { TNavigationSearchParams } from '@/contracts/mavigation';
+
+export default function Home({
+  searchParams,
+}: {
+  searchParams: TNavigationSearchParams;
+}) {
+  const routeSearchParams = use(searchParams);
+  const mode = (routeSearchParams?.mode || 'login') as 'login' | 'signup';
+
+  return <AuthForm mode={mode} />;
 }
