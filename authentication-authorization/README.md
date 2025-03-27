@@ -1,4 +1,4 @@
-# Mutating Data
+# Authorization
 
 This project is part of the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller). In this fifth project, we explore authentication and authorization mechanisms in Next.js and React.
 
