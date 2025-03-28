@@ -1,12 +1,10 @@
+import { EventList } from '@/components/events';
+import { getAllEvents } from '@/mocks/dummy-data';
 import Head from 'next/head';
 
-const events = [
-  { id: '1', title: 'Event 1' },
-  { id: '2', title: 'Event 2' },
-  { id: '3', title: 'Event 3' },
-];
-
 export default function Events() {
+  const events = getAllEvents();
+
   return (
     <>
       <Head>
@@ -17,11 +15,7 @@ export default function Events() {
       </Head>
       <main>
         <h1>All Events</h1>
-        <ul>
-          {events.map(({ id, title }) => (
-            <li key={id}>{title}</li>
-          ))}
-        </ul>
+        <EventList events={events} />
       </main>
     </>
   );
