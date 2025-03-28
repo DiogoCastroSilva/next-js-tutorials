@@ -1,11 +1,11 @@
 import Head from 'next/head';
 
-const featuredEvents = [
-  { id: '1', title: 'Event 1' },
-  { id: '2', title: 'Event 2' },
-];
+import EventsList from '@/components/events/event-list/events-list';
+import { getFeaturedEvents } from '@/mocks/dummy-data';
 
 export default function Home() {
+  const featuredEvents = getFeaturedEvents();
+
   return (
     <>
       <Head>
@@ -16,11 +16,7 @@ export default function Home() {
       </Head>
       <main>
         <h1>Next Events</h1>
-        <ul>
-          {featuredEvents.map(({ id, title }) => (
-            <li key={id}>{title}</li>
-          ))}
-        </ul>
+        <EventsList events={featuredEvents} />
       </main>
     </>
   );
