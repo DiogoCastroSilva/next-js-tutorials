@@ -1,5 +1,9 @@
 import Image from 'next/image';
-import Link from 'next/link';
+
+import Button from '@/components/events/ui/button/button';
+import DateIcon from '@/components/events/ui/icons/date-icon';
+import AddressIcon from '@/components/events/ui/icons/address-icon';
+import ArrowRightIcon from '@/components/events/ui/icons/arrow-right-icon';
 
 import styles from './event-item.module.css';
 
@@ -25,14 +29,21 @@ export default function EventItem({ event }: { event: IEvent }) {
         <div>
           <h2>{title}</h2>
           <div className={styles.date}>
+            <DateIcon />
             <time>{humanReadableDate}</time>
           </div>
           <div className={styles.address}>
+            <AddressIcon />
             <address>{formattedAddress}</address>
           </div>
         </div>
         <div className={styles.actions}>
-          <Link href={exploreLink}>Explore Event</Link>
+          <Button link={exploreLink}>
+            <span>Explore Event</span>
+            <span className={styles.icon}>
+              <ArrowRightIcon />
+            </span>
+          </Button>
         </div>
       </div>
     </li>
