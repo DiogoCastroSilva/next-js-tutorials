@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-import Button from '@/components/events/ui/button/button';
-import DateIcon from '@/components/events/ui/icons/date-icon';
-import AddressIcon from '@/components/events/ui/icons/address-icon';
-import ArrowRightIcon from '@/components/events/ui/icons/arrow-right-icon';
+import Button from '@/components/ui/button/button';
+import AddressIcon from '@/components/ui/icons/address-icon';
+import ArrowRightIcon from '@/components/ui/icons/arrow-right-icon';
+import DateIcon from '@/components/ui/icons/date-icon';
 
 import styles from './event-item.module.css';
 

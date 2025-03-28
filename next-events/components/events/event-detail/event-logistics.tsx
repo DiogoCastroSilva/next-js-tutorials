@@ -1,9 +1,9 @@
-import DateIcon from '@/components/events/ui/icons/date-icon';
-import AddressIcon from '@/components/events/ui/icons/address-icon';
+import AddressIcon from '@/components/ui/icons/address-icon';
+import DateIcon from '@/components/ui/icons/date-icon';
 
-import LogisticsItem from './logistics-item';
-import styles from './event-logistics.module.css';
 import { IEventLogistics } from './contracts';
+import styles from './event-logistics.module.css';
+import LogisticsItem from './logistics-item';
 
 export default function EventLogistics({
   date,
