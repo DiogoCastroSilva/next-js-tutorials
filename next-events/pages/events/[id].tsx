@@ -1,22 +1,17 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { getEventById } from '@/mocks/dummy-data';
-import EventSummary from '@/components/events/event-detail/event-summary';
-import EventLogistics from '@/components/events/event-detail/event-logistics';
 import EventContent from '@/components/events/event-detail/event-content';
+import EventLogistics from '@/components/events/event-detail/event-logistics';
+import EventSummary from '@/components/events/event-detail/event-summary';
+import ErrorAlert from '@/components/ui/error-alert/error-alert';
+import { getEventById } from '@/mocks/dummy-data';
 
 export default function EventDetails() {
   const router = useRouter();
 
   const eventId = router.query.id;
   const event = getEventById(eventId as string);
-
-  if (!event) {
-    return <p>Event not found</p>;
-  }
-
-  const { title, date, location, image, description  } = event;
 
   return (
     <>
@@ -30,14 +25,25 @@ export default function EventDetails() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <EventSummary title={title} />
-        <EventLogistics
-          date={date}
-          address={location}
-          image={image}
-          imageAlt={description}
-        />
-        <EventContent><p>{description}</p></EventContent>
+        {!event && (
+          <ErrorAlert>
+            <p>Event not found</p>
+          </ErrorAlert>
+        )}
+        {event && (
+          <>
+            <EventSummary title={event.title} />
+            <EventLogistics
+              date={event.date}
+              address={event.location}
+              image={event.image}
+              imageAlt={event.description}
+            />
+            <EventContent>
+              <p>{event.description}</p>
+            </EventContent>
+          </>
+        )}
       </main>
     </>
   );

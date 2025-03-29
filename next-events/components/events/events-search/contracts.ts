@@ -1,6 +1,6 @@
 interface ISearchTerms {
-   year?: string;
-   month?: string;
+  year?: string;
+  month?: string;
 }
 
 interface IEventsSearch {
