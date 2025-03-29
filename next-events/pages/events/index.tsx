@@ -1,9 +1,18 @@
-import { EventList } from '@/components/events';
-import { getAllEvents } from '@/mocks/dummy-data';
 import Head from 'next/head';
+import { useRouter } from 'next/navigation';
+
+import { EventList, EventsSearch } from '@/components/events';
+import { ISearchTerms } from '@/components/events/events-search/contracts';
+import { getAllEvents } from '@/mocks/dummy-data';
 
 export default function Events() {
+  const router = useRouter();
+
   const events = getAllEvents();
+
+  function handleOnSearch({ year, month }: ISearchTerms) {
+    router.push(`/events/${year}/${month}`);
+  }
 
   return (
     <>
@@ -15,6 +24,7 @@ export default function Events() {
       </Head>
       <main>
         <h1>All Events</h1>
+        <EventsSearch onSearch={handleOnSearch} />
         <EventList events={events} />
       </main>
     </>
