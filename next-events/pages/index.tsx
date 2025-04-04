@@ -2,6 +2,7 @@ import Head from 'next/head';
 
 import EventsList from '@/components/events/event-list/events-list';
 import { API_ENDPOINT, REVALIDATE_HALF_HOUR } from '@/config';
+import NewsletterRegistration from '@/components/input/newsletter-registration/newsletter-registration';
 
 import type { TEvents } from '@/contracts/event';
 
@@ -17,6 +18,7 @@ export default function Home({ events }: { events: TEvents }) {
       </Head>
       <main>
         <h1>Featured Events</h1>
+        <NewsletterRegistration />
         <EventsList events={events} />
       </main>
     </>
