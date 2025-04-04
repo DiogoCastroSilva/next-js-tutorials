@@ -1,18 +1,15 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { GetStaticPropsContext } from 'next';
 
 import EventContent from '@/components/events/event-detail/event-content';
 import EventLogistics from '@/components/events/event-detail/event-logistics';
 import EventSummary from '@/components/events/event-detail/event-summary';
 import ErrorAlert from '@/components/ui/error-alert/error-alert';
-import { getEventById } from '@/mocks/dummy-data';
+import { API_ENDPOINT } from '@/config';
 
-export default function EventDetails() {
-  const router = useRouter();
+import type { IEvent } from '@/contracts/event';
 
-  const eventId = router.query.id;
-  const event = getEventById(eventId as string);
-
+export default function EventDetails({ event }: { event: IEvent }) {
   return (
     <>
       <Head>
@@ -47,4 +44,40 @@ export default function EventDetails() {
       </main>
     </>
   );
+}
+
+export async function getStaticPaths() {
+  const response = await fetch(`${API_ENDPOINT}/api/events`);
+  const events = await response.json();
+
+  const paths = events.map((event: IEvent) => ({
+    params: { id: event.id },
+  }));
+
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export async function getStaticProps(
+  context: GetStaticPropsContext<{ id: string }>
+) {
+  const id = context.params?.id;
+  const response = await fetch(`${API_ENDPOINT}/api/events/${id}`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  const event = await response.json();
+
+  if (!event) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { event },
+  };
 }
