@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import EventsList from '@/components/events/event-list/events-list';
-import { API_ENDPOINT } from '@/config';
+import { API_ENDPOINT, REVALIDATE_HALF_HOUR } from '@/config';
 
 import type { TEvents } from '@/contracts/event';
 
@@ -42,5 +42,6 @@ export async function getStaticProps() {
 
   return {
     props: { events },
+    revalidate: REVALIDATE_HALF_HOUR,
   };
 }

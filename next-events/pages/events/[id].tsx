@@ -5,7 +5,7 @@ import EventContent from '@/components/events/event-detail/event-content';
 import EventLogistics from '@/components/events/event-detail/event-logistics';
 import EventSummary from '@/components/events/event-detail/event-summary';
 import ErrorAlert from '@/components/ui/error-alert/error-alert';
-import { API_ENDPOINT } from '@/config';
+import { API_ENDPOINT, REVALIDATE_HALF_MINUTE } from '@/config';
 
 import type { IEvent } from '@/contracts/event';
 
@@ -47,7 +47,7 @@ export default function EventDetails({ event }: { event: IEvent }) {
 }
 
 export async function getStaticPaths() {
-  const response = await fetch(`${API_ENDPOINT}/api/events`);
+  const response = await fetch(`${API_ENDPOINT}/api/featured/events`);
   const events = await response.json();
 
   const paths = events.map((event: IEvent) => ({
@@ -56,7 +56,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
@@ -79,5 +79,6 @@ export async function getStaticProps(
 
   return {
     props: { event },
+    revalidate: REVALIDATE_HALF_MINUTE,
   };
 }
