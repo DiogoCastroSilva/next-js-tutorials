@@ -1,11 +1,11 @@
 import Head from 'next/head';
 
 import EventsList from '@/components/events/event-list/events-list';
-import { getFeaturedEvents } from '@/mocks/dummy-data';
+import { API_ENDPOINT } from '@/config';
 
-export default function Home() {
-  const featuredEvents = getFeaturedEvents();
+import type { TEvents } from '@/contracts/event';
 
+export default function Home({ events }: { events: TEvents }) {
   return (
     <>
       <Head>
@@ -19,8 +19,28 @@ export default function Home() {
       </Head>
       <main>
         <h1>Featured Events</h1>
-        <EventsList events={featuredEvents} />
+        <EventsList events={events} />
       </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const response = await fetch(`${API_ENDPOINT}/api/featured/events`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const events = await response.json();
+
+  if (!events) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { events },
+  };
 }
