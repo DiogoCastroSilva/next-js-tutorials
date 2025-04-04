@@ -1,30 +1,24 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
 
 import { EventList } from '@/components/events';
-import { getFilteredEvents } from '@/mocks/dummy-data';
 import ResultTitle from '@/components/events/result-title/result-title';
 import Button from '@/components/ui/button/button';
 import ErrorAlert from '@/components/ui/error-alert/error-alert';
+import { API_ENDPOINT } from '@/config';
+import { TEvents } from '@/contracts/event';
 
-export default function FilteredEvents() {
-  const router = useRouter();
-
-  const slug = router.query.slug;
-  const year = Number(slug?.[0]);
-  const month = Number(slug?.[1]);
-
-  console.log(slug);
-
-  const isDateInvalid =
-    isNaN(year) ||
-    isNaN(month) ||
-    year > 2030 ||
-    year < 2020 ||
-    month < 1 ||
-    month > 12;
-
-  const events = isDateInvalid ? null : getFilteredEvents({ year, month });
+export default function FilteredEvents({
+  events,
+  year,
+  month,
+  isDateInvalid,
+}: {
+  events: TEvents;
+  year: number;
+  month: number;
+  isDateInvalid: boolean;
+}) {
   const hasEvents = events && events.length > 0;
 
   return (
@@ -39,8 +33,8 @@ export default function FilteredEvents() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {!slug && <p className="center">Loading...</p>}
-        {slug && isDateInvalid && (
+        {!events && !isDateInvalid && <p className="center">Loading...</p>}
+        {isDateInvalid && (
           <>
             <ErrorAlert>
               <p>Invalid filter! Please adjust your values</p>
@@ -50,7 +44,7 @@ export default function FilteredEvents() {
             </div>
           </>
         )}
-        {slug && !isDateInvalid && !hasEvents && (
+        {!isDateInvalid && !hasEvents && (
           <>
             <ErrorAlert>
               <p>No events found for the chosen filter!</p>
@@ -69,4 +63,41 @@ export default function FilteredEvents() {
       </main>
     </>
   );
+}
+
+export async function getServerSideProps(
+  context: GetServerSidePropsContext<{ slug: string[] }>
+) {
+  const { params } = context;
+
+  const slug = params?.slug;
+  const year = Number(slug?.[0]);
+  const month = Number(slug?.[1]);
+  const query = `?year=${year}&month=${month}`;
+
+  const response = await fetch(`${API_ENDPOINT}/api/events${query}`);
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    if (error?.message) {
+      const { message } = error;
+
+      if (message === 'Invalid filter') {
+        return {
+          props: { isDateInvalid: true },
+        };
+      }
+    }
+
+    return {
+      notFound: true,
+    };
+  }
+
+  const events = await response.json();
+
+  return {
+    props: { events, year, month },
+  };
 }
