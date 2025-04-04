@@ -27,10 +27,8 @@ export default function FilteredEvents({
         <title>Filtered Event | Next Events</title>
         <meta
           name="description"
-          content="Filtered events to match your search"
+          content={`Events filtered by the month ${month} and year ${year}`}
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
         {!events && !isDateInvalid && <p className="center">Loading...</p>}

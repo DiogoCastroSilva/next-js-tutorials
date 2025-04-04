@@ -14,8 +14,6 @@ export default function Home({ events }: { events: TEvents }) {
           name="description"
           content="Find the all the featured events happening"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
         <h1>Featured Events</h1>
