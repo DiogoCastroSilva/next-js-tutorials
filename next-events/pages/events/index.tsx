@@ -3,12 +3,12 @@ import { useRouter } from 'next/navigation';
 
 import { EventList, EventsSearch } from '@/components/events';
 import { ISearchTerms } from '@/components/events/events-search/contracts';
-import { getAllEvents } from '@/mocks/dummy-data';
+import { API_ENDPOINT, REVALIDATE_EVERY_MINUTE } from '@/config';
 
-export default function Events() {
+import type { TEvents } from '@/contracts/event';
+
+export default function Events({ events }: { events: TEvents }) {
   const router = useRouter();
-
-  const events = getAllEvents();
 
   function handleOnSearch({ year, month }: ISearchTerms) {
     router.push(`/events/${year}/${month}`);
@@ -29,4 +29,25 @@ export default function Events() {
       </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const response = await fetch(`${API_ENDPOINT}/api/events`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const events = await response.json();
+
+  if (!events) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { events },
+    revalidate: REVALIDATE_EVERY_MINUTE,
+  };
 }
