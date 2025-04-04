@@ -4,6 +4,7 @@ import DateIcon from '@/components/ui/icons/date-icon';
 import { IEventLogistics } from './contracts';
 import styles from './event-logistics.module.css';
 import LogisticsItem from './logistics-item';
+import Image from 'next/image';
 
 export default function EventLogistics({
   date,
@@ -21,7 +22,7 @@ export default function EventLogistics({
   return (
     <section className={styles.logistics}>
       <div className={styles.image}>
-        <img src={`/${image}`} alt={imageAlt} />
+        <Image src={`/${image}`} alt={imageAlt} width={400} height={400} />
       </div>
       <ul className={styles.list}>
         <LogisticsItem icon={<DateIcon />}>
