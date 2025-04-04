@@ -11,6 +11,10 @@ List of exercices for this tutorial:
   - [x] Events page - All events available
     - [x] Events Details page
     - [x] Filtered Events page
+- [ ] Create the following API routes
+  - [ ] Signup to a newsletter
+  - [ ] Add comments to an event
+  - [ ] Get all the comments belonging to a event
 
 ## Next Js
 
