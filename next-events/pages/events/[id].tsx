@@ -13,13 +13,11 @@ export default function EventDetails({ event }: { event: IEvent }) {
   return (
     <>
       <Head>
-        <title>Event | Next Events</title>
+        <title>{event ? event.title : 'Event not fund'} | Next Events</title>
         <meta
           name="description"
           content="Find more about the event happening"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
         {!event && (
