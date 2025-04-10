@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { API_ENDPOINT } from '@/config';
+import useNotifications from '@/hooks/use-notifications';
 
 import CommentList from '../comment-list/comment-list';
 import NewComment from '../new-comment/new-comment';
@@ -8,11 +9,12 @@ import styles from './comments.module.css';
 
 import type { IComments } from './contracts';
 import type { INewCommentValues } from '../new-comment/contracts';
-import { IComment } from '@/contracts/comment';
+import type { IComment } from '@/contracts/comment';
 
 export default function Comments({ eventId }: IComments) {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<IComment[]>([]);
+  const { showNotification } = useNotifications();
 
   const loadComments = useCallback(async () => {
     try {
@@ -46,11 +48,22 @@ export default function Comments({ eventId }: IComments) {
         },
         body: JSON.stringify(commentData),
       });
-      const data = await response.json();
 
-      console.log(data);
-    } catch (error) {
-      console.error(error);
+      if (!response.ok) {
+        throw new Error('Failed to add comment');
+      }
+
+      showNotification({
+        title: 'Success!',
+        message: 'Comment added successfully!',
+        status: 'success',
+      });
+    } catch {
+      showNotification({
+        title: 'Error!',
+        message: 'Failed to add comment',
+        status: 'error',
+      });
     }
   }
 
