@@ -8,6 +8,7 @@ This repo contains projects learned during a tutorial for NextJs.
 - [DJ Events](/dj-events/README.md)
 - [Pages Router](/pages-router/README.md)
 - [Next Events](/next-events/README.md)
+- [Next Blog](/next-blog/README.md)
 
 ### App Router
 - [Next Level Food](/next-level-food/README.md)
