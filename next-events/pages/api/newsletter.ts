@@ -1,9 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import client from '@/lib/client';
+import eventsDB from '@/lib/events-db';
+
 type IMessage = { message: string };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<IMessage>
 ) {
@@ -15,7 +18,19 @@ export default function handler(
       return;
     }
 
-    res.status(201).json({ message: 'Signed up!' });
+    try {
+      await client.connect();
+
+      await eventsDB.collection('emails').insertOne({ email });
+
+      res.status(201).json({ message: 'Signed up!' });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Internal server error' });
+    } finally {
+      await client.close();
+    }
+
     return;
   }
 

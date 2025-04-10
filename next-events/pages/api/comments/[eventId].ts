@@ -1,37 +1,20 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
+
+import eventsDB from '@/lib/events-db';
+
 import type { IComment } from '@/contracts/comment';
+import client from '@/lib/client';
 
 type IMessage = { message: string };
 type ICommentResponse = { comment: IComment } & IMessage;
 type ICommentsResponse = { comments: IComment[] };
 
-const comments: IComment[] = [
-  {
-    email: 'email@email.com',
-    name: 'Email',
-    text: 'This is a comment',
-    id: '1',
-  },
-  {
-    email: 'email@email.com',
-    name: 'Email',
-    text: 'This is a comment',
-    id: '2',
-  },
-  {
-    email: 'email@email.com',
-    name: 'Email',
-    text: 'This is a comment',
-    id: '3',
-  },
-];
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<IMessage | ICommentResponse | ICommentsResponse>
 ) {
-  const { eventId } = req.query;
+  const eventId = req.query.eventId as string;
 
   if (!eventId) {
     res.status(404).json({ message: 'Invalid event id' });
@@ -52,23 +35,54 @@ export default function handler(
       return;
     }
 
-    const newComment = {
+    const newComment: Omit<IComment, '_id'> = {
       email,
       name,
       text,
-      id: new Date().toISOString(),
+      eventId,
     };
 
-    console.log(newComment);
+    try {
+      await client.connect();
 
-    comments.push(newComment);
+      const result = await eventsDB
+        .collection('comments')
+        .insertOne(newComment);
 
-    res.status(201).json({ message: 'Comment created!', comment: newComment });
+      res.status(201).json({
+        message: 'Comment created!',
+        comment: { ...newComment, _id: result.insertedId.toString() },
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Internal server error' });
+    } finally {
+      await client.close();
+    }
+
     return;
   }
 
   if (req.method === 'GET') {
-    res.status(200).json({ comments });
+    try {
+      await client.connect();
+
+      const comments = await eventsDB
+        .collection<IComment>('comments')
+        .find({ eventId })
+        .sort({ _id: -1 })
+        .toArray();
+
+      res.status(201).json({
+        comments,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Internal server error' });
+    } finally {
+      await client.close();
+    }
+
     return;
   }
 
