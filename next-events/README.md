@@ -13,8 +13,8 @@ List of exercices for this tutorial:
     - [x] Filtered Events page
 - [ ] Create the following API routes
   - [x] Signup to a newsletter
-  - [ ] Add comments to an event
-  - [ ] Get all the comments belonging to a event
+  - [x] Add comments to an event
+  - [X] Get all the comments belonging to a event
 
 ## Next Js
 

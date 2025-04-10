@@ -39,7 +39,7 @@ export default function NewComment({ onAddComment }: INewComment) {
   }
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={sendCommentHandler}>
       <div className={styles.row}>
         <div className={styles.control}>
           <label htmlFor="email">Your email</label>

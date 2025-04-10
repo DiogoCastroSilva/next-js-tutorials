@@ -7,9 +7,6 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<IMessage>
 ) {
-  console.log('Method', req.method);
-  console.log('Body', req.body);
-
   if (req.method === 'POST') {
     const email = req.body.email;
 
