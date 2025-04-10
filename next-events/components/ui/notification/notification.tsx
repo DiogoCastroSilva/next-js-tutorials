@@ -1,3 +1,5 @@
+import useNotifications from '@/hooks/use-notifications';
+
 import styles from './notification.module.css';
 
 import type { INotification } from './contracts';
@@ -7,6 +9,8 @@ export default function Notification({
   message,
   status,
 }: INotification) {
+  const { hideNotification } = useNotifications();
+
   let statusClasses = '';
 
   if (status === 'success') {
@@ -24,7 +28,7 @@ export default function Notification({
   const activeClasses = `${styles.notification} ${statusClasses}`;
 
   return (
-    <div className={activeClasses}>
+    <div className={activeClasses} onClick={hideNotification}>
       <h2>{title}</h2>
       <p>{message}</p>
     </div>
