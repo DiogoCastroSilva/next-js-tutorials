@@ -4,8 +4,8 @@ import styles from './comment-list.module.css';
 export default function CommentList({ data }: { data: IComment[] }) {
   return (
     <ul className={styles.comments}>
-      {data.map(({ id, text, name }) => (
-        <li key={id}>
+      {data.map(({ _id, text, name }) => (
+        <li key={_id}>
           <p>{text}</p>
           <div>
             By <address>{name}</address>

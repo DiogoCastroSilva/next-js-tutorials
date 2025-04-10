@@ -2,6 +2,8 @@
 
 This is the seven project from the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller). In this project, we explore the traditional Pages Router approach in Next.js to build a dynamic Events application. The app will allow users to browse, filter, and view details of various events, demonstrating key concepts such as server-side rendering (SSR), static site generation (SSG), and dynamic routing in older versions of Next.js.
 
+It will also connect with Mongo DB to fetch and save comments.
+
 ## TODO
 
 List of exercices for this tutorial:
