@@ -1,4 +1,5 @@
 import PostsGrid from '@/components/posts/posts-grid/posts-grid';
+
 import styles from './featured-posts.module.css';
 
 import type { TPosts } from '@/contracts/post';
