@@ -11,10 +11,11 @@ export default function Hero() {
           src="/images/site/diogo.jpeg"
           width={300}
           height={300}
+          priority
         />
       </div>
-      <div>Hi, I am Diogo</div>
-      <p>I blog about technology, spceially about frontend software</p>
+      <h1>Hi, I am Diogo</h1>
+      <p>I blog about technology, specially about frontend software</p>
     </section>
   );
 }

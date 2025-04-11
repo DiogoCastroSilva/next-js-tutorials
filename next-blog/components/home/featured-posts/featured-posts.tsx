@@ -1,10 +1,13 @@
+import PostsGrid from '@/components/posts/posts-grid/posts-grid';
 import styles from './featured-posts.module.css';
 
-export default function FeaturedPosts() {
+import type { TPosts } from '@/contracts/post';
+
+export default function FeaturedPosts({ posts }: { posts: TPosts }) {
   return (
-    <div>
-      <h1>Featured Posts</h1>
-      <p>This is the Featured Posts section.</p>
-    </div>
+    <section className={styles.latest}>
+      <h2>Featured Posts</h2>
+      <PostsGrid posts={posts} />
+    </section>
   );
 }
