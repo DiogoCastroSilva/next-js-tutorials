@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
-import styles from '@/styles/Home.module.css';
+import Hero from '@/components/home/hero/hero';
+import FeaturedPosts from '@/components/home/featured-posts/featured-posts';
 
 export default function Home() {
   return (
@@ -9,9 +10,10 @@ export default function Home() {
         <title>Diogo NextJs Blog</title>
         <meta name="description" content="Diogo Next js Blog" />
       </Head>
-      <div className={`${styles.page}`}>
-        <main className={styles.main}></main>
-      </div>
+        <main>
+          <Hero />
+          <FeaturedPosts />
+        </main>
     </>
   );
 }
