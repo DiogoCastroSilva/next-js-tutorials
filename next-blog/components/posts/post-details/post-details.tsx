@@ -1,3 +1,5 @@
+import ReactMarkdown from 'react-markdown';
+
 import PostHeader from './post-header';
 import styles from './post-details.module.css';
 
@@ -18,7 +20,7 @@ export default function PostDetails() {
   return (
     <article className={styles.content}>
       <PostHeader title={title} image={imagePath} />
-      {content}
+      <ReactMarkdown>{content}</ReactMarkdown>
     </article>
   );
 }

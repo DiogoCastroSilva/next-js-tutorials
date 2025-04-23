@@ -1,6 +1,5 @@
 import Head from 'next/head';
 
-import styles from '@/styles/Home.module.css';
 import PostDetails from '@/components/posts/post-details/post-details';
 
 export default function Post() {
@@ -10,11 +9,9 @@ export default function Post() {
         <title>Post | Diogo NextJs Blog</title>
         <meta name="description" content="Post about..." />
       </Head>
-      <div className={`${styles.page}`}>
-        <main className={styles.main}>
-          <PostDetails />
-        </main>
-      </div>
+      <main>
+        <PostDetails />
+      </main>
     </>
   );
 }
