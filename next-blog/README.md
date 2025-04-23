@@ -24,7 +24,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Application
 
-TBD
+![Home page](../images/next-blog/home.png)
+![Posts page](../images/next-blog/posts.png)
+![Contact page](../images/next-blog/contact.png)
+![Contact Notification page](../images/next-blog/contact-notification.png)
 
 ## Resources
 
