@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import styles from '@/styles/Home.module.css';
+import PostDetails from '@/components/posts/post-details/post-details';
 
 export default function Post() {
   return (
@@ -10,7 +11,9 @@ export default function Post() {
         <meta name="description" content="Post about..." />
       </Head>
       <div className={`${styles.page}`}>
-        <main className={styles.main}></main>
+        <main className={styles.main}>
+          <PostDetails />
+        </main>
       </div>
     </>
   );
