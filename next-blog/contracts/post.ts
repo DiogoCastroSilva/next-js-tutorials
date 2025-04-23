@@ -5,6 +5,7 @@ interface IPost {
   date: string;
   excerpt?: string;
   content?: string;
+  isFeatured?: boolean;
 }
 
 type TPosts = IPost[];
