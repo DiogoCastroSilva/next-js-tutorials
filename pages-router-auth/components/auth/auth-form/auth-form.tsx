@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { signIn } from 'next-auth/react';
 
 import { API_ENDPOINT } from '@/config';
 
@@ -42,6 +43,9 @@ function AuthForm() {
     const password = passwordRef.current?.value;
 
     if (isLogin) {
+      const result = await signIn('credentials', { redirect: false, email, password });
+
+      console.log(result);
     } else {
       await createUser(email, password);
     }
