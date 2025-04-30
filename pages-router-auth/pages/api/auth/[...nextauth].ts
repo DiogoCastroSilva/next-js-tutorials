@@ -1,10 +1,11 @@
+import NextAuth, { AuthOptions } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+
 import authDB from '@/lib/auth-db';
 import { verifyPassword } from '@/lib/auth-utils';
 import client from '@/lib/client';
-import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
 
-export default NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     Credentials({
       session: {
@@ -27,7 +28,10 @@ export default NextAuth({
           throw new Error('No user found');
         }
 
-        const isValid = await verifyPassword(credentials!.password, user.password);
+        const isValid = await verifyPassword(
+          credentials!.password,
+          user.password
+        );
 
         if (!isValid) {
           await client.close();
@@ -41,4 +45,6 @@ export default NextAuth({
       },
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);
