@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 import { API_ENDPOINT } from '@/config';
 
@@ -29,6 +30,7 @@ async function createUser(email?: string, password?: string) {
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
+  const router = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -43,7 +45,15 @@ function AuthForm() {
     const password = passwordRef.current?.value;
 
     if (isLogin) {
-      const result = await signIn('credentials', { redirect: false, email, password });
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (!result?.error) {
+        router.replace('/profile');
+      }
 
       console.log(result);
     } else {
