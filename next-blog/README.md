@@ -1,6 +1,6 @@
 # Next Events
 
-This is the eith project from the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller). In this project, we explore the traditional Pages Router approach in Next.js to build a dynamic blog application. It will display Blogs post that were saved using markdown syntax in Mongo DB.
+This is the eighth project from the course [Next.js 15 & React - The Complete Guide](https://www.udemy.com/course/nextjs-react-the-complete-guide) by [Maximilian Schwarzmüller](https://github.com/mschwarzmueller). In this project, we explore the traditional Pages Router approach in Next.js to build a dynamic blog application. It will display Blogs post that were saved using markdown syntax in Mongo DB.
 
 ## Next Js
 

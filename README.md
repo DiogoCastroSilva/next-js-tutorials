@@ -9,6 +9,7 @@ This repo contains projects learned during a tutorial for NextJs.
 - [Pages Router](/pages-router/README.md)
 - [Next Events](/next-events/README.md)
 - [Next Blog](/next-blog/README.md)
+- [Pages Router Auth](/pages-router-auth/README.md)
 
 ### App Router
 - [Next Level Food](/next-level-food/README.md)
