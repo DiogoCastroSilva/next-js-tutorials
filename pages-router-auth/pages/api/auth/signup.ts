@@ -29,6 +29,12 @@ export default async function handler(
     try {
       await client.connect();
 
+      const existingUser = await authDB.collection('users').findOne({ email });
+
+      if (existingUser) {
+        throw new Error('User already exists');
+      }
+
       const hashedPassword = await hashPassword(password);
 
       await authDB
