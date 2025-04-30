@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next';
-
 import client from '@/lib/client';
 import authDB from '@/lib/auth-db';
 import { hashPassword } from '@/lib/auth-utils';
+
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Data = {
   message: string;
