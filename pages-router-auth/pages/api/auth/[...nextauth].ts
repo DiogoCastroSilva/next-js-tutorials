@@ -1,8 +1,9 @@
+import NextAuth, { AuthOptions } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+
 import authDB from '@/lib/auth-db';
 import { verifyPassword } from '@/lib/auth-utils';
 import client from '@/lib/client';
-import NextAuth, { AuthOptions } from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
 
 export const authOptions: AuthOptions = {
   providers: [
