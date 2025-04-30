@@ -24,7 +24,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Application
 
-TBD
+![Home page](../images/pages-router-auth/home.png)
+
+![Auth page](../images/pages-router-auth/auth.png)
+
+![Profile](../images/pages-router-auth/profile.png)
 
 ## Resources
 
